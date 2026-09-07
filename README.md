@@ -79,8 +79,8 @@ docker build -t htsh-vcard .   # multi-stage: node build -> nginx serve
 `.github/workflows/build-deploy.yml` builds the image, pushes it to the
 GitHub Container Registry (`ghcr.io/krzlew/vcard`), and deploys it over SSH
 on push to `main`. It uses the built-in `GITHUB_TOKEN` for the registry
-push and expects `DEPLOY_HOST`, `DEPLOY_USER`, `DEPLOY_SSH_KEY`, and
-`DEPLOY_COMPOSE_DIR` as repo secrets for the SSH step.
+push and expects `DEPLOY_HOST`, `DEPLOY_PORT`, `DEPLOY_USER`,
+`DEPLOY_SSH_KEY`, and `DEPLOY_COMPOSE_DIR` as repo secrets for the SSH step.
 `deploy/docker-compose.vcard.yml` is a reference template for the
 Traefik-side service block, not something this repo deploys directly.
 
