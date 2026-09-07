@@ -1,0 +1,33 @@
+---
+layout: layouts/base.njk
+pageNumber: P200
+extensionText: BLOG INDEX
+permalink: /blog/
+title: Blog
+summary: Notes on DevOps, self-hosting, and homelab projects from Krzysztof Lewczuk.
+---
+<section class="content content-full">
+  <div class="post-index">
+    <p class="section-marker">
+      <span>LATEST ENTRIES</span>
+      <span class="feed-links"><a class="feed-link" href="/feed.xml">RSS</a> / <a class="feed-link" href="/atom.xml">ATOM</a></span>
+    </p>
+
+    {% for post in collections.posts | reverse %}
+    <article class="entry-row">
+      <div class="entry-head">
+        <span class="entry-number">{{ post.data.number }}</span>
+        <a class="entry-title" href="{{ post.url }}">{{ post.data.title }}</a>
+      </div>
+      <div class="entry-meta">
+        <span class="branch">&#9500;&#9472;&#9472;</span>
+        DATE: {{ post.data.date | dateDisplay }}&nbsp;&nbsp;&nbsp;TAGS: {{ post.data.tags | join(" / ") }}
+      </div>
+      <div class="entry-summary">
+        <span class="branch">&#9492;&#9472;&#9472;</span>
+        {{ post.data.summary }}
+      </div>
+    </article>
+    {% endfor %}
+  </div>
+</section>

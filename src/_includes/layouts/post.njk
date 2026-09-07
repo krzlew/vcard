@@ -1,0 +1,22 @@
+---
+layout: layouts/base.njk
+---
+<section class="content content-full">
+  <div class="post-body">
+    <pre class="post-meta"> TITLE: {{ title | upper }}
+ DATE:  {{ date | dateDisplay }}</pre>
+
+    {{ content | safe }}
+
+    <p class="post-nav">Type 200 for index.</p>
+  </div>
+</section>
+
+<script type="application/ld+json">{{ {
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": title,
+  "datePublished": date,
+  "author": { "@type": "Person", "name": site.author },
+  "url": site.url + page.url
+} | jsonStringify | safe }}</script>

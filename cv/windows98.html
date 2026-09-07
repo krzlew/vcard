@@ -1,0 +1,1154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Krzysztof Lewczuk — Senior DevOps Engineer [Windows 98]</title>
+    <meta name="robots" content="noindex">
+    <link rel="stylesheet" href="https://unpkg.com/98.css@0.1.21/dist/98.css">
+    <style>
+        /* ============================================
+           WINDOWS 98 DESKTOP
+           ============================================ */
+        * {
+            box-sizing: border-box;
+        }
+
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: "MS Sans Serif", "Microsoft Sans Serif", Tahoma, Geneva, Arial, sans-serif;
+            font-size: 11px;
+            background: #008080;
+            color: #000;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            padding: 24px 16px 40px;
+            overflow-x: hidden;
+            -webkit-font-smoothing: none;
+        }
+
+        /* keep 98.css controls on the same retro font as the rest of the page */
+        button,
+        input,
+        select,
+        textarea {
+            font-family: inherit;
+        }
+
+        /* faint desktop watermark logo */
+        .desktop-mark {
+            position: fixed;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            pointer-events: none;
+            font-size: clamp(40px, 10vw, 120px);
+            color: rgba(255, 255, 255, 0.07);
+            font-weight: bold;
+            letter-spacing: 2px;
+            user-select: none;
+            z-index: 0;
+        }
+
+        /* ============================================
+           MAIN WINDOW
+           ============================================ */
+        #mainWindow {
+            position: relative;
+            width: min(1020px, 96vw);
+            max-height: calc(100vh - 64px);
+            display: flex;
+            flex-direction: column;
+            background: #c0c0c0;
+            /* keep 98.css's native inset bevel, then add a retro drop shadow */
+            box-shadow: inset -1px -1px #0a0a0a, inset 1px 1px #dfdfdf,
+                        inset -2px -2px grey, inset 2px 2px #fff,
+                        6px 6px 0 rgba(0, 0, 0, 0.35);
+            z-index: 10;
+            transition: width 0.2s ease, max-height 0.2s ease;
+        }
+
+        #mainWindow.maximized {
+            width: calc(100vw - 24px);
+            max-height: calc(100vh - 24px);
+        }
+
+        #mainWindow.minimized {
+            display: none;
+        }
+
+        #mainWindow .window-body {
+            overflow: auto;
+            flex: 1;
+            min-height: 0;
+            /* right spacing as padding (not margin) so the scrollbar sits
+               flush with the window edge, as verified in DevTools */
+            margin-right: 0;
+            padding-right: 8px;
+        }
+
+        /* ============================================
+           MENU BAR + POPUPS
+           ============================================ */
+        .menu-bar {
+            display: flex;
+            background: #c0c0c0;
+            padding: 1px 2px;
+            border-top: 1px solid #fff;
+            border-bottom: 1px solid #808080;
+            position: relative;
+            z-index: 50;
+        }
+
+        .menu-bar > .menu-item {
+            position: relative;
+            padding: 2px 7px;
+            cursor: default;
+            user-select: none;
+            white-space: nowrap;
+        }
+
+        .menu-bar > .menu-item:hover,
+        .menu-bar > .menu-item.open {
+            background: #000080;
+            color: #fff;
+        }
+
+        .menu-popup {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            min-width: 190px;
+            background: #c0c0c0;
+            border: 2px solid;
+            border-color: #fff #000 #000 #fff;
+            box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.3);
+            display: none;
+            padding: 2px;
+            z-index: 100;
+        }
+
+        .menu-item.open .menu-popup {
+            display: block;
+        }
+
+        .menu-popup .menu-option {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 3px 18px 3px 24px;
+            white-space: nowrap;
+            cursor: default;
+        }
+
+        .menu-popup .menu-option:hover,
+        .menu-popup .menu-option.active {
+            background: #000080;
+            color: #fff;
+        }
+
+        .menu-popup .menu-option.disabled {
+            color: #808080;
+            text-shadow: 1px 1px 0 #fff;
+        }
+
+        .menu-popup .menu-option.disabled:hover {
+            background: transparent;
+            color: #808080;
+        }
+
+        .menu-popup hr {
+            border: none;
+            border-top: 1px solid #808080;
+            border-bottom: 1px solid #fff;
+            margin: 3px 2px;
+        }
+
+        /* ============================================
+           IN-WINDOW HEADER
+           ============================================ */
+        .resume-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 10px;
+            padding: 8px;
+            background: #c0c0c0;
+        }
+
+        .avatar-box {
+            width: 52px;
+            height: 52px;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            font-weight: bold;
+            color: #000080;
+            background: #c0c0c0;
+            border: 2px solid;
+            border-color: #fff #000 #000 #fff;
+            box-shadow: 1px 1px 0 #000;
+        }
+
+        .resume-header h1 {
+            margin: 0;
+            font-size: 16px;
+            font-weight: bold;
+            color: #000;
+        }
+
+        .resume-header .subtitle {
+            font-size: 11px;
+            color: #000;
+            margin-top: 2px;
+        }
+
+        .resume-header .location {
+            font-size: 11px;
+            color: #000;
+            margin-top: 2px;
+        }
+
+        /* retro marquee */
+        .marquee {
+            overflow: hidden;
+            white-space: nowrap;
+            border: 2px solid;
+            border-color: #808080 #fff #fff #808080;
+            background: #fff;
+            padding: 2px 4px;
+            margin-bottom: 10px;
+            font-size: 11px;
+            color: #000080;
+        }
+
+        .marquee span {
+            display: inline-block;
+            padding-left: 100%;
+            animation: marquee 18s linear infinite;
+        }
+
+        @keyframes marquee {
+            0%   { transform: translateX(0); }
+            100% { transform: translateX(-100%); }
+        }
+
+        /* Tabs + tree-view use the native 98.css components:
+           menu[role=tablist] + li[role=tab], .window[role=tabpanel],
+           and ul.tree-view with details/summary expanders. */
+
+        /* ============================================
+           CONTENT STYLES
+           ============================================ */
+        /* native 98.css .sunken-panel + a little padding for content */
+        .sunken-panel {
+            padding: 8px;
+        }
+
+        .section-title {
+            font-weight: bold;
+            font-size: 12px;
+            margin: 0 0 8px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .about-text {
+            line-height: 1.5;
+            margin: 0;
+        }
+
+        .about-highlights {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 10px;
+        }
+
+        /* About highlights — rendered as focused-style buttons instead of
+           grayed-out disabled ones (98.css has no native .focused class,
+           so mimic its :focus ring on top of the normal button bevel).
+           Informational only: static, and kept out of the tab order. */
+        .about-highlights button.focused {
+            outline: 1px dotted #000;
+            outline-offset: -4px;
+            cursor: default;
+        }
+
+        .about-highlights button.focused:hover,
+        .about-highlights button.focused:active {
+            box-shadow: inset -1px -1px #0a0a0a, inset 1px 1px #dfdfdf,
+                        inset -2px -2px grey, inset 2px 2px #fff;
+            padding: 0 12px;
+        }
+
+        /* experience list */
+        .exp-item {
+            margin-bottom: 10px;
+            padding: 8px;
+            background: #c0c0c0;
+            border: 2px solid;
+            border-color: #fff #808080 #808080 #fff;
+        }
+
+        .exp-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .exp-head {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .exp-role {
+            font-weight: bold;
+        }
+
+        .exp-company {
+            margin-top: 1px;
+        }
+
+        .exp-date {
+            background: #c0c0c0;
+            border: 2px solid;
+            border-color: #fff #000 #000 #fff;
+            padding: 1px 6px;
+            white-space: nowrap;
+            font-size: 11px;
+        }
+
+        .exp-desc {
+            margin: 6px 0 0;
+            padding-left: 18px;
+        }
+
+        .exp-desc li {
+            margin-bottom: 3px;
+        }
+
+        /* tree view (skills) — native 98.css ul.tree-view with details/summary */
+        #skillTree {
+            max-height: 340px;
+            overflow: auto;
+        }
+
+        #skillTree summary {
+            cursor: pointer;
+            color: #000;
+        }
+
+        #skillTree summary:focus-visible {
+            outline: 1px dotted #000;
+            outline-offset: -1px;
+        }
+
+        .folder-icon {
+            width: 16px;
+            height: 16px;
+            vertical-align: middle;
+            margin-right: 3px;
+        }
+
+        #skillTree .skill-badge {
+            display: inline-block;
+            margin: 2px 4px 2px 0;
+            padding: 2px 8px;
+            background: #c0c0c0;
+            border: 2px solid;
+            border-color: #fff #808080 #808080 #fff;
+            font-size: 11px;
+        }
+
+        /* contact — native .field-row with light content tweaks */
+        .field-row label {
+            width: 70px;
+            flex-shrink: 0;
+        }
+
+        .field-row .contact-value {
+            background: #fff;
+            border: 2px solid;
+            border-color: #808080 #fff #fff #808080;
+            padding: 2px 6px;
+            flex: 1;
+            min-width: 0;
+        }
+
+        /* contact action buttons are native button elements — no custom styling needed */
+
+        /* Status bar uses the native .status-bar / .status-bar-field classes */
+        .status-bar-field.flex {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .status-bar-field.clock {
+            flex-grow: 0;
+            min-width: 60px;
+            text-align: center;
+        }
+
+        /* ============================================
+           MINIMIZED BAR (restore)
+           ============================================ */
+        #minBar {
+            position: fixed;
+            bottom: 12px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: none;
+            z-index: 60;
+            align-items: center;
+            gap: 8px;
+            background: #c0c0c0;
+            border: 2px solid;
+            border-color: #fff #000 #000 #fff;
+            box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.3);
+            padding: 4px 6px;
+            font-size: 11px;
+        }
+
+        #minBar.show {
+            display: flex;
+        }
+
+        #minBar .bar-icon {
+            width: 14px;
+            height: 14px;
+            background: #000080;
+            color: #fff;
+            font-weight: bold;
+            text-align: center;
+            line-height: 14px;
+            font-size: 10px;
+        }
+
+        /* ============================================
+           DIALOG (message box)
+           ============================================ */
+        #dialogLayer {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.25);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 200;
+        }
+
+        #dialogLayer.show {
+            display: flex;
+        }
+
+        .dialog-window {
+            width: 360px;
+            max-width: 92vw;
+            background: #c0c0c0;
+            /* native inset bevel + drop shadow, same as #mainWindow */
+            box-shadow: inset -1px -1px #0a0a0a, inset 1px 1px #dfdfdf,
+                        inset -2px -2px grey, inset 2px 2px #fff,
+                        6px 6px 0 rgba(0, 0, 0, 0.4);
+        }
+
+        .dialog-window .window-body {
+            margin: 12px;
+        }
+
+        .dialog-window .message-box {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            font-size: 11px;
+            line-height: 1.5;
+        }
+
+        .dialog-window .message-box-icon {
+            width: 40px;
+            height: 40px;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .dialog-window .dialog-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 14px;
+        }
+
+        .dialog-window .dialog-buttons button {
+            min-width: 80px;
+        }
+
+        /* ============================================
+           FOOTER
+           ============================================ */
+        .win98-footer {
+            text-align: center;
+            margin-top: 12px;
+            padding-top: 8px;
+            border-top: 1px solid #808080;
+            color: #000;
+            font-size: 11px;
+        }
+
+        .win98-footer a {
+            color: #0000ee;
+        }
+
+        /* ============================================
+           PRINT — flat CV
+           ============================================ */
+        @media print {
+            body {
+                background: #fff;
+                padding: 0;
+                display: block;
+            }
+
+            .desktop-mark,
+            .menu-bar,
+            #mainWindow .title-bar,
+            .status-bar,
+            .marquee,
+            #minBar,
+            #dialogLayer,
+            .win98-footer,
+            .print-hidden {
+                display: none !important;
+            }
+
+            #mainWindow {
+                width: 100%;
+                max-height: none;
+                box-shadow: none;
+            }
+
+            #mainWindow .window-body {
+                overflow: visible;
+                padding: 0;
+            }
+
+            [role="tablist"] {
+                display: none;
+            }
+
+            [role="tabpanel"] {
+                display: block !important;
+                margin-bottom: 12px;
+                padding: 0;
+                box-shadow: none;
+                background: #fff;
+            }
+
+            [role="tabpanel"] .window-body {
+                margin: 0;
+            }
+
+            .exp-item,
+            .sunken-panel {
+                border: none;
+                padding: 4px 0;
+            }
+
+            .exp-item {
+                page-break-inside: avoid;
+            }
+
+            .resume-header {
+                border-bottom: 2px solid #000;
+                margin-bottom: 10px;
+                padding: 0 0 8px;
+            }
+
+            .avatar-box {
+                width: 40px;
+                height: 40px;
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="desktop-mark">htsh.pl</div>
+
+    <!-- ============================================
+         MAIN WINDOW
+         ============================================ -->
+    <div class="window" id="mainWindow" role="dialog" aria-label="CV — Krzysztof Lewczuk">
+        <div class="title-bar">
+            <div class="title-bar-text">htsh.pl — CV: Krzysztof Lewczuk</div>
+            <div class="title-bar-controls">
+                <button aria-label="Minimize" id="btnMin"></button>
+                <button aria-label="Maximize" id="btnMax"></button>
+                <button aria-label="Close" id="btnClose"></button>
+            </div>
+        </div>
+
+        <!-- Menu bar -->
+        <nav class="menu-bar" aria-label="Application menu">
+            <div class="menu-item">
+                File
+                <div class="menu-popup" id="menu-file">
+                    <div class="menu-option" data-action="print">Print CV</div>
+                    <hr>
+                    <div class="menu-option" data-action="modern">Open modern version</div>
+                    <div class="menu-option disabled">Exit — you can't leave</div>
+                </div>
+            </div>
+            <div class="menu-item">
+                View
+                <div class="menu-popup" id="menu-view">
+                    <div class="menu-option active" data-action="tab-about">About</div>
+                    <div class="menu-option" data-action="tab-experience">Experience</div>
+                    <div class="menu-option" data-action="tab-skills">Skills</div>
+                    <div class="menu-option" data-action="tab-contact">Contact</div>
+                </div>
+            </div>
+            <div class="menu-item">
+                Help
+                <div class="menu-popup" id="menu-help">
+                    <div class="menu-option" data-action="about">About this CV</div>
+                    <hr>
+                    <div class="menu-option" data-action="modern">htsh.pl — modern version</div>
+                </div>
+            </div>
+        </nav>
+
+        <div class="window-body">
+            <!-- Retro marquee -->
+            <div class="marquee">
+                <span>Welcome to htsh.pl — the home of Krzysztof Lewczuk · Senior DevOps Engineer · Wrocław, Poland · Remote friendly · Powered by 98.css</span>
+            </div>
+
+            <!-- Resume header -->
+            <div class="resume-header sunken-panel">
+                <div class="avatar-box" aria-hidden="true">KL</div>
+                <div style="flex:1;min-width:0;">
+                    <h1>Krzysztof Lewczuk</h1>
+                    <div class="subtitle"><b>Senior DevOps Engineer</b></div>
+                    <div class="location">Wrocław, Poland · Remote friendly</div>
+                </div>
+            </div>
+
+            <!-- Tabs -->
+            <menu role="tablist" aria-label="Resume sections" id="tablist">
+                <li role="tab" aria-selected="true" aria-controls="panel-about"><a href="#panel-about" tabindex="0">About</a></li>
+                <li role="tab" aria-selected="false" aria-controls="panel-experience"><a href="#panel-experience" tabindex="-1">Experience</a></li>
+                <li role="tab" aria-selected="false" aria-controls="panel-skills"><a href="#panel-skills" tabindex="-1">Skills</a></li>
+                <li role="tab" aria-selected="false" aria-controls="panel-contact"><a href="#panel-contact" tabindex="-1">Contact</a></li>
+            </menu>
+
+                <!-- ============ ABOUT ============ -->
+                <div class="window" role="tabpanel" id="panel-about">
+                    <div class="window-body">
+                    <h2 class="section-title">About — readme.txt</h2>
+                    <div class="sunken-panel">
+                        <p class="about-text">
+                            Self-taught, into computers since I can remember. I work across the dev/ops
+                            boundary — writing the infrastructure code one day, debugging what broke in
+                            production the next. Hands-on experience spans cloud infrastructure, container
+                            orchestration, CI/CD pipelines, and system administration, from bare metal to
+                            multi-cloud.
+                        </p>
+                        <div class="about-highlights">
+                            <button type="button" class="focused" tabindex="-1">✓ Multi-cloud (AWS, Azure, OpenStack)</button>
+                            <button type="button" class="focused" tabindex="-1">✓ Kubernetes &amp; Docker</button>
+                            <button type="button" class="focused" tabindex="-1">✓ CI/CD &amp; GitOps</button>
+                        </div>
+                    </div>
+                    <p style="margin:8px 0 0;color:#000;">Double-click anywhere on the desktop for a surprise…</p>
+                    </div>
+                </div>
+
+                <!-- ============ EXPERIENCE ============ -->
+                <div class="window" role="tabpanel" id="panel-experience" hidden>
+                    <div class="window-body">
+                    <h2 class="section-title">Experience — career.log</h2>
+
+                    <div class="exp-item">
+                        <div class="exp-head">
+                            <span class="exp-role">Senior DevOps Engineer</span>
+                            <span class="exp-date">Oct 2023 — Present</span>
+                        </div>
+                        <div class="exp-company">Thaumatec Tech Group · Wrocław, Poland</div>
+                        <ul class="exp-desc">
+                            <li>Leading DevOps practices and cloud infrastructure strategy</li>
+                            <li>Managing CI/CD pipelines, container orchestration, and cloud resource provisioning</li>
+                            <li>Introduced automation and infrastructure-as-code practices across teams</li>
+                        </ul>
+                    </div>
+
+                    <div class="exp-item">
+                        <div class="exp-head">
+                            <span class="exp-role">Owner</span>
+                            <span class="exp-date">Jan 2018 — Present</span>
+                        </div>
+                        <div class="exp-company">HTSH · Poland</div>
+                        <ul class="exp-desc">
+                            <li>Running independent DevOps consultancy and web development services</li>
+                            <li>Managing cloud infrastructure and automation for clients</li>
+                        </ul>
+                    </div>
+
+                    <div class="exp-item">
+                        <div class="exp-head">
+                            <span class="exp-role">Senior DevOps Engineer</span>
+                            <span class="exp-date">Aug 2022 — Aug 2023</span>
+                        </div>
+                        <div class="exp-company">Eviden · Wrocław, Poland</div>
+                        <ul class="exp-desc">
+                            <li>Led infrastructure automation and cloud operations</li>
+                            <li>Managed CI/CD pipelines, container deployments, and system reliability</li>
+                        </ul>
+                    </div>
+
+                    <div class="exp-item">
+                        <div class="exp-head">
+                            <span class="exp-role">DevOps Engineer</span>
+                            <span class="exp-date">Sep 2020 — Jun 2022</span>
+                        </div>
+                        <div class="exp-company">Star (acquired by Pro4People) · Wrocław, Poland</div>
+                        <ul class="exp-desc">
+                            <li>Developed and maintained medical products (Software as Medical Device) based on QMS compliance with all applicable regulations and standards</li>
+                            <li>Deployed and maintained SDLC and PLC environments</li>
+                            <li>Developed Infrastructure as Code with Terraform and AWS provider (VPC, EC2, Auto Scaling, RDS, S3, Route53, Lambda, CloudFront, CloudWatch, AMI, AWS Backup)</li>
+                            <li>Implemented and maintained build environment — Jenkins, SonarQube, Nexus repository, Packer, Ansible, OpenVPN</li>
+                        </ul>
+                    </div>
+
+                    <div class="exp-item">
+                        <div class="exp-head">
+                            <span class="exp-role">DevOps Engineer</span>
+                            <span class="exp-date">May 2019 — Jun 2020</span>
+                        </div>
+                        <div class="exp-company">NeuroSYS · Wrocław Area, Poland</div>
+                        <ul class="exp-desc">
+                            <li>Deployed and maintained products written in PHP, .NET, and Node.js — served via direct deployment, Docker containers, and Helm charts on Kubernetes</li>
+                            <li>Configuration management with Terraform, Ansible, and code deployment using GitLab CI</li>
+                            <li>Managed public cloud, private cloud, and dedicated server infrastructure (AWS, Azure, DigitalOcean, OpenStack, Hetzner)</li>
+                            <li>Built and deployed Docker containers to break up monolithic apps into microservices</li>
+                            <li>Installed and configured Zabbix and Sentry for infrastructure and application error monitoring</li>
+                            <li>Set up on-premises Kubernetes cluster for development and GitLab CI runners with shared cache</li>
+                        </ul>
+                    </div>
+
+                    <div class="exp-item">
+                        <div class="exp-head">
+                            <span class="exp-role">DevOps Engineer</span>
+                            <span class="exp-date">Feb 2019 — Apr 2019</span>
+                        </div>
+                        <div class="exp-company">The Coders · Wrocław Area, Poland</div>
+                        <ul class="exp-desc">
+                            <li>Short-term contract to prepare highly available environment for a web application</li>
+                            <li>Designed and implemented infrastructure based on OpenStack private cloud with Terraform and Ansible</li>
+                        </ul>
+                    </div>
+
+                    <div class="exp-item">
+                        <div class="exp-head">
+                            <span class="exp-role">System Administrator</span>
+                            <span class="exp-date">Jan 2018 — Jan 2019</span>
+                        </div>
+                        <div class="exp-company">Piwik PRO · Wrocław, Poland</div>
+                        <ul class="exp-desc">
+                            <li>Deployed and maintained a new product based on Docker Containers, Rancher Orchestrator, Linux, Ansible on on-premises (bare metal, VMs) and public cloud (AWS, Azure) infrastructure</li>
+                            <li>Deployed and maintained a legacy product based on Linux, Keepalived, HAProxy, Nginx, php-fpm, MySQL/MariaDB, Nagios, Puppet</li>
+                            <li>Maintained various Linux environments (Debian, Ubuntu, CentOS, RHEL)</li>
+                            <li>Migrated customer data from legacy product to the new product</li>
+                        </ul>
+                    </div>
+
+                    <div class="exp-item">
+                        <div class="exp-head">
+                            <span class="exp-role">IT Specialist</span>
+                            <span class="exp-date">Mar 2015 — Jan 2018</span>
+                        </div>
+                        <div class="exp-company">ASAJ · Siedlce, Poland</div>
+                        <ul class="exp-desc">
+                            <li>Implemented and maintained a Windows domain-based infrastructure</li>
+                            <li>Led migration to a virtualized environment</li>
+                            <li>Configured, installed, and maintained hardware/software equipment including routers and switches at 19 locations</li>
+                            <li>Built several internal PHP applications integrated with CRM/ERP systems</li>
+                            <li>Automated redundant tasks using PowerShell</li>
+                            <li>Worked with employees to resolve complex support requests</li>
+                        </ul>
+                    </div>
+
+                    <div class="exp-item">
+                        <div class="exp-head">
+                            <span class="exp-role">IT Specialist</span>
+                            <span class="exp-date">Mar 2013 — Mar 2015</span>
+                        </div>
+                        <div class="exp-company">SEDKOMP Sp. Jawna Sawicki, Sikora · Siedlce, Poland</div>
+                        <ul class="exp-desc">
+                            <li>Performed maintenance, troubleshooting, and repair on desktop/laptop PCs and networks</li>
+                            <li>Configured, deployed, and maintained CRM, WMS, and ERP systems</li>
+                            <li>Resolved technical issues on-site and remotely</li>
+                            <li>Created websites using WordPress and Joomla</li>
+                        </ul>
+                    </div>
+                    </div>
+                </div>
+
+                <!-- ============ SKILLS ============ -->
+                <div class="window" role="tabpanel" id="panel-skills" hidden>
+                    <div class="window-body">
+                    <h2 class="section-title">Skills — Device Manager</h2>
+                    <ul class="tree-view" id="skillTree">
+                        <li>
+                            <details>
+                                <summary><svg class="folder-icon" viewBox="0 0 16 16" aria-hidden="true"><path d="M1.5 4.8 V4.1 Q1.5 3.8 1.8 3.8 H5.6 L6.8 5.2 H14.2 Q14.5 5.2 14.5 5.5 V12.2 Q14.5 12.5 14.2 12.5 H1.8 Q1.5 12.5 1.5 12.2 Z" fill="#f7c948" stroke="#000" stroke-width="0.8"/></svg>Cloud &amp; Infrastructure</summary>
+                                <ul>
+                                    <li><span class="skill-badge">AWS</span><span class="skill-badge">Azure</span><span class="skill-badge">DigitalOcean</span><span class="skill-badge">OpenStack</span><span class="skill-badge">Hetzner</span><span class="skill-badge">Bare Metal</span></li>
+                                </ul>
+                            </details>
+                        </li>
+                        <li>
+                            <details>
+                                <summary><svg class="folder-icon" viewBox="0 0 16 16" aria-hidden="true"><path d="M1.5 4.8 V4.1 Q1.5 3.8 1.8 3.8 H5.6 L6.8 5.2 H14.2 Q14.5 5.2 14.5 5.5 V12.2 Q14.5 12.5 14.2 12.5 H1.8 Q1.5 12.5 1.5 12.2 Z" fill="#f7c948" stroke="#000" stroke-width="0.8"/></svg>Containers &amp; Orchestration</summary>
+                                <ul>
+                                    <li><span class="skill-badge">Docker</span><span class="skill-badge">Kubernetes</span><span class="skill-badge">Rancher</span><span class="skill-badge">Helm</span><span class="skill-badge">Docker Swarm</span></li>
+                                </ul>
+                            </details>
+                        </li>
+                        <li>
+                            <details>
+                                <summary><svg class="folder-icon" viewBox="0 0 16 16" aria-hidden="true"><path d="M1.5 4.8 V4.1 Q1.5 3.8 1.8 3.8 H5.6 L6.8 5.2 H14.2 Q14.5 5.2 14.5 5.5 V12.2 Q14.5 12.5 14.2 12.5 H1.8 Q1.5 12.5 1.5 12.2 Z" fill="#f7c948" stroke="#000" stroke-width="0.8"/></svg>CI/CD &amp; Automation</summary>
+                                <ul>
+                                    <li><span class="skill-badge">GitLab CI</span><span class="skill-badge">Jenkins</span><span class="skill-badge">Ansible</span><span class="skill-badge">Packer</span></li>
+                                </ul>
+                            </details>
+                        </li>
+                        <li>
+                            <details>
+                                <summary><svg class="folder-icon" viewBox="0 0 16 16" aria-hidden="true"><path d="M1.5 4.8 V4.1 Q1.5 3.8 1.8 3.8 H5.6 L6.8 5.2 H14.2 Q14.5 5.2 14.5 5.5 V12.2 Q14.5 12.5 14.2 12.5 H1.8 Q1.5 12.5 1.5 12.2 Z" fill="#f7c948" stroke="#000" stroke-width="0.8"/></svg>Infrastructure as Code</summary>
+                                <ul>
+                                    <li><span class="skill-badge">Terraform</span><span class="skill-badge">Ansible</span><span class="skill-badge">HCL</span></li>
+                                </ul>
+                            </details>
+                        </li>
+                        <li>
+                            <details>
+                                <summary><svg class="folder-icon" viewBox="0 0 16 16" aria-hidden="true"><path d="M1.5 4.8 V4.1 Q1.5 3.8 1.8 3.8 H5.6 L6.8 5.2 H14.2 Q14.5 5.2 14.5 5.5 V12.2 Q14.5 12.5 14.2 12.5 H1.8 Q1.5 12.5 1.5 12.2 Z" fill="#f7c948" stroke="#000" stroke-width="0.8"/></svg>Languages &amp; Databases</summary>
+                                <ul>
+                                    <li><span class="skill-badge">Python</span><span class="skill-badge">PHP</span><span class="skill-badge">Bash</span><span class="skill-badge">PowerShell</span><span class="skill-badge">SQL</span><span class="skill-badge">MySQL</span><span class="skill-badge">MSSQL</span></li>
+                                </ul>
+                            </details>
+                        </li>
+                        <li>
+                            <details>
+                                <summary><svg class="folder-icon" viewBox="0 0 16 16" aria-hidden="true"><path d="M1.5 4.8 V4.1 Q1.5 3.8 1.8 3.8 H5.6 L6.8 5.2 H14.2 Q14.5 5.2 14.5 5.5 V12.2 Q14.5 12.5 14.2 12.5 H1.8 Q1.5 12.5 1.5 12.2 Z" fill="#f7c948" stroke="#000" stroke-width="0.8"/></svg>Monitoring &amp; Observability</summary>
+                                <ul>
+                                    <li><span class="skill-badge">Zabbix</span><span class="skill-badge">Sentry</span><span class="skill-badge">Nagios</span><span class="skill-badge">Grafana</span></li>
+                                </ul>
+                            </details>
+                        </li>
+                        <li>
+                            <details>
+                                <summary><svg class="folder-icon" viewBox="0 0 16 16" aria-hidden="true"><path d="M1.5 4.8 V4.1 Q1.5 3.8 1.8 3.8 H5.6 L6.8 5.2 H14.2 Q14.5 5.2 14.5 5.5 V12.2 Q14.5 12.5 14.2 12.5 H1.8 Q1.5 12.5 1.5 12.2 Z" fill="#f7c948" stroke="#000" stroke-width="0.8"/></svg>Systems &amp; Networking</summary>
+                                <ul>
+                                    <li><span class="skill-badge">Linux</span><span class="skill-badge">Debian</span><span class="skill-badge">Ubuntu</span><span class="skill-badge">CentOS</span><span class="skill-badge">RHEL</span><span class="skill-badge">Nginx</span><span class="skill-badge">HAProxy</span><span class="skill-badge">Keepalived</span><span class="skill-badge">OpenVPN</span></li>
+                                </ul>
+                            </details>
+                        </li>
+                        <li>
+                            <details>
+                                <summary><svg class="folder-icon" viewBox="0 0 16 16" aria-hidden="true"><path d="M1.5 4.8 V4.1 Q1.5 3.8 1.8 3.8 H5.6 L6.8 5.2 H14.2 Q14.5 5.2 14.5 5.5 V12.2 Q14.5 12.5 14.2 12.5 H1.8 Q1.5 12.5 1.5 12.2 Z" fill="#f7c948" stroke="#000" stroke-width="0.8"/></svg>Web &amp; Other</summary>
+                                <ul>
+                                    <li><span class="skill-badge">WordPress</span><span class="skill-badge">Joomla</span><span class="skill-badge">SonarQube</span><span class="skill-badge">Nexus</span><span class="skill-badge">Puppet</span><span class="skill-badge">VMware</span></li>
+                                </ul>
+                            </details>
+                        </li>
+                    </ul>
+                    <p style="margin:10px 0 0;">Click a folder to expand/collapse each category.</p>
+                    </div>
+                </div>
+
+                <!-- ============ CONTACT ============ -->
+                <div class="window" role="tabpanel" id="panel-contact" hidden>
+                    <div class="window-body">
+                    <h2 class="section-title">Contact — mailto.exe</h2>
+                    <div class="sunken-panel">
+                        <div class="field-row">
+                            <label>Email</label>
+                            <span class="contact-value">kontakt@htsh.pl</span>
+                            <button onclick="location.href='mailto:kontakt@htsh.pl'">Write</button>
+                        </div>
+                        <div class="field-row">
+                            <label>Phone</label>
+                            <span class="contact-value">+48 503 368 326</span>
+                            <button onclick="location.href='tel:+48503368326'">Call</button>
+                        </div>
+                        <div class="field-row">
+                            <label>LinkedIn</label>
+                            <span class="contact-value">/in/krzysztof-lewczuk</span>
+                            <button onclick="window.open('https://linkedin.com/in/krzysztof-lewczuk','_blank')">Visit</button>
+                        </div>
+                        <div class="field-row">
+                            <label>GitHub</label>
+                            <span class="contact-value">/krzlew</span>
+                            <button onclick="window.open('https://github.com/krzlew','_blank')">Visit</button>
+                        </div>
+                        <div class="field-row">
+                            <label>Website</label>
+                            <span class="contact-value">htsh.pl</span>
+                            <button onclick="window.open('https://htsh.pl','_blank')">Visit</button>
+                        </div>
+                    </div>
+                    <div style="margin-top:10px;display:flex;gap:8px;">
+                        <button id="btnPrint" onclick="window.print()">Print CV</button>
+                        <button onclick="location.href='index.html'">Modern version</button>
+                    </div>
+                    </div>
+                </div>
+
+            <div class="win98-footer">
+                Built with HTML &amp; <a href="https://jdan.github.io/98.css/" target="_blank" rel="noopener">98.css</a> ·
+                <a href="index.html">Back to the modern version</a> ·
+                <a href="/">htsh.pl</a>
+            </div>
+        </div><!-- /window-body -->
+
+        <!-- Status bar -->
+        <div class="status-bar">
+            <p class="status-bar-field flex" id="statusMsg">Ready</p>
+            <p class="status-bar-field">Senior DevOps Engineer</p>
+            <p class="status-bar-field clock" id="clock"></p>
+        </div>
+    </div>
+
+    <!-- Minimized restore bar -->
+    <div id="minBar" role="button" tabindex="0" aria-label="Restore window">
+        <span class="bar-icon">K</span>
+        <span>htsh.pl — CV: Krzysztof Lewczuk</span>
+    </div>
+
+    <!-- Dialog layer -->
+    <div id="dialogLayer" role="presentation">
+        <div class="window dialog-window" role="dialog" aria-modal="true" aria-labelledby="dialogTitle">
+            <div class="title-bar">
+                <div class="title-bar-text" id="dialogTitle">Message</div>
+                <div class="title-bar-controls">
+                    <button aria-label="Close" id="btnDialogClose"></button>
+                </div>
+            </div>
+            <div class="window-body">
+                <div class="message-box">
+                    <div class="message-box-icon" id="dialogIcon"></div>
+                    <div class="message-box-content" id="dialogText"></div>
+                </div>
+                <div class="dialog-buttons" id="dialogButtons"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        /* ============================================
+           TAB SWITCHING
+           ============================================ */
+        const tabs = document.querySelectorAll('#tablist [role="tab"]');
+        const panels = document.querySelectorAll('[role="tabpanel"]');
+
+        function showTab(name) {
+            tabs.forEach(t => {
+                const on = t.getAttribute('aria-controls') === name;
+                t.setAttribute('aria-selected', on ? 'true' : 'false');
+                const a = t.querySelector('a');
+                if (a) a.tabIndex = on ? 0 : -1; /* roving tabindex — only active tab in tab order */
+            });
+            panels.forEach(p => {
+                p.hidden = p.id !== name;
+            });
+            // sync View menu active state
+            document.querySelectorAll('#menu-view .menu-option').forEach(o => {
+                o.classList.toggle('active', o.dataset.action === 'tab-' + name.replace('panel-', ''));
+            });
+            const active = document.querySelector('#tablist [aria-selected="true"]');
+            setStatus('Viewing: ' + (active ? active.textContent.trim() : name));
+        }
+
+        tabs.forEach(t => {
+            t.addEventListener('click', (e) => {
+                e.preventDefault();
+                showTab(t.getAttribute('aria-controls'));
+            });
+        });
+
+        /* arrow-key navigation between tabs (ARIA tabs pattern) */
+        document.getElementById('tablist').addEventListener('keydown', (e) => {
+            const idx = Array.prototype.findIndex.call(tabs, t => t === document.activeElement || t.contains(document.activeElement));
+            if (idx === -1) return;
+            let next = idx;
+            if (e.key === 'ArrowRight') next = (idx + 1) % tabs.length;
+            else if (e.key === 'ArrowLeft') next = (idx - 1 + tabs.length) % tabs.length;
+            else if (e.key === 'Home') next = 0;
+            else if (e.key === 'End') next = tabs.length - 1;
+            else return;
+            e.preventDefault();
+            showTab(tabs[next].getAttribute('aria-controls'));
+            const a = tabs[next].querySelector('a');
+            if (a) a.focus();
+        });
+
+        /* Tree view (skills) uses native details/summary — no JS required */
+
+        /* ============================================
+           MENUS
+           ============================================ */
+        const menuItems = document.querySelectorAll('.menu-bar > .menu-item');
+
+        menuItems.forEach(item => {
+            item.addEventListener('click', (e) => {
+                const wasOpen = item.classList.contains('open');
+                closeMenus();
+                if (!wasOpen) item.classList.add('open');
+                e.stopPropagation();
+            });
+        });
+
+        document.addEventListener('click', closeMenus);
+        function closeMenus() {
+            menuItems.forEach(m => m.classList.remove('open'));
+        }
+
+        document.querySelectorAll('.menu-popup .menu-option').forEach(opt => {
+            opt.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const action = opt.dataset.action;
+                if (!action) return;
+                closeMenus();
+                if (action.startsWith('tab-')) {
+                    showTab('panel-' + action.replace('tab-', ''));
+                } else if (action === 'print') {
+                    window.print();
+                } else if (action === 'about') {
+                    openDialog('About', 'info', 'Krzysztof Lewczuk — Senior DevOps Engineer.\n\nThis CV runs as a Windows 98 application. Built with 98.css. There is no escape — it’s that good.', ['OK']);
+                } else if (action === 'modern') {
+                    location.href = 'index.html';
+                }
+            });
+        });
+
+        /* ============================================
+           STATUS BAR / CLOCK
+           ============================================ */
+        const statusMsg = document.getElementById('statusMsg');
+        function setStatus(msg) {
+            statusMsg.textContent = msg;
+        }
+
+        function tickClock() {
+            const now = new Date();
+            const hh = String(now.getHours()).padStart(2, '0');
+            const mm = String(now.getMinutes()).padStart(2, '0');
+            document.getElementById('clock').textContent = hh + ':' + mm;
+        }
+        tickClock();
+        setInterval(tickClock, 1000 * 20);
+
+        /* ============================================
+           WINDOW CONTROLS
+           ============================================ */
+        const mainWindow = document.getElementById('mainWindow');
+        const minBar = document.getElementById('minBar');
+
+        document.getElementById('btnMax').addEventListener('click', () => {
+            mainWindow.classList.toggle('maximized');
+            setStatus(mainWindow.classList.contains('maximized') ? 'Window maximized' : 'Window restored');
+        });
+
+        document.getElementById('btnMin').addEventListener('click', () => {
+            mainWindow.classList.add('minimized');
+            minBar.classList.add('show');
+            setStatus('Application minimized to taskbar');
+        });
+
+        function restoreWindow() {
+            mainWindow.classList.remove('minimized');
+            minBar.classList.remove('show');
+            setStatus('Ready');
+        }
+        minBar.addEventListener('click', restoreWindow);
+        minBar.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') restoreWindow(); });
+
+        document.getElementById('btnClose').addEventListener('click', () => {
+            openDialog('Exit', 'question', 'Do you really want to leave this perfectly good Windows 98 CV?', [
+                { label: 'Yes', fn: () => { location.href = 'index.html'; } },
+                { label: 'No', fn: closeDialog }
+            ]);
+        });
+
+        /* ============================================
+           DIALOG
+           ============================================ */
+        const dialogLayer = document.getElementById('dialogLayer');
+        const dialogText = document.getElementById('dialogText');
+        const dialogIcon = document.getElementById('dialogIcon');
+        const dialogTitle = document.getElementById('dialogTitle');
+        const dialogButtons = document.getElementById('dialogButtons');
+
+        const DIALOG_ICONS = {
+            info: '<svg viewBox="0 0 16 16" width="34" height="34" aria-hidden="true"><circle cx="8" cy="8" r="7" fill="#000080" stroke="#000" stroke-width="1"/><text x="8" y="12" text-anchor="middle" font-size="12" font-weight="bold" fill="#fff" font-family="Tahoma, sans-serif">i</text></svg>',
+            question: '<svg viewBox="0 0 16 16" width="34" height="34" aria-hidden="true"><circle cx="8" cy="8" r="7" fill="#000080" stroke="#000" stroke-width="1"/><text x="8" y="12" text-anchor="middle" font-size="11" font-weight="bold" fill="#fff" font-family="Tahoma, sans-serif">?</text></svg>',
+            computer: '<svg viewBox="0 0 16 16" width="34" height="34" aria-hidden="true"><rect x="1" y="1.5" width="14" height="10" fill="#c0c0c0" stroke="#000" stroke-width="1"/><rect x="2.5" y="3" width="11" height="7" fill="#008080" stroke="#000" stroke-width="1"/><rect x="6" y="11.5" width="4" height="2" fill="#c0c0c0" stroke="#000" stroke-width="1"/><rect x="3.5" y="13.5" width="9" height="1.5" fill="#c0c0c0" stroke="#000" stroke-width="1"/></svg>'
+        };
+
+        function openDialog(title, icon, text, buttons) {
+            dialogTitle.textContent = title;
+            dialogIcon.innerHTML = DIALOG_ICONS[icon] || DIALOG_ICONS.info;
+            dialogText.textContent = text;
+            dialogText.style.whiteSpace = 'pre-line';
+            dialogButtons.innerHTML = '';
+            buttons.forEach(b => {
+                const btn = document.createElement('button');
+                btn.textContent = b.label || b;
+                btn.addEventListener('click', () => { (b.fn || closeDialog)(); });
+                dialogButtons.appendChild(btn);
+            });
+            dialogLayer.classList.add('show');
+        }
+
+        function closeDialog() {
+            dialogLayer.classList.remove('show');
+        }
+
+        document.getElementById('btnDialogClose').addEventListener('click', closeDialog);
+        dialogLayer.addEventListener('click', (e) => { if (e.target === dialogLayer) closeDialog(); });
+
+        /* ============================================
+           DESKTOP EASTER EGG
+           ============================================ */
+        document.addEventListener('dblclick', (e) => {
+            if (e.target.closest('#mainWindow, #minBar, #dialogLayer')) return;
+            openDialog('Shut Down Windows', 'computer', 'It’s now safe to close this tab.\n\n(Actually, this is just a website. The real Krzysztof is still here.)', ['OK']);
+        });
+
+        /* keyboard: Escape closes dialog/menus */
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                closeDialog();
+                closeMenus();
+            }
+        });
+    </script>
+</body>
+</html>

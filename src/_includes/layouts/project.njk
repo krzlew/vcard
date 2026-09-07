@@ -1,0 +1,26 @@
+---
+layout: layouts/base.njk
+---
+<section class="content content-full">
+  <div class="post-body">
+    <pre class="post-meta"> PROJECT: {{ title }}
+ TECH:    {{ tech }}
+ STATUS:  {{ status }}</pre>
+
+    {% if link %}
+    <p class="project-visit"><a class="teletext-link-inline" href="{{ link }}" target="_blank" rel="noopener noreferrer">VISIT &rarr; {{ linkLabel or link }}</a></p>
+    {% endif %}
+
+    {{ content | safe }}
+
+    {% if images and images.length %}
+    <div class="project-shots">
+      {% for image in images %}
+      <img src="{{ image }}" alt="{{ title }} screenshot" loading="lazy">
+      {% endfor %}
+    </div>
+    {% endif %}
+
+    <p class="post-nav">Type 300 for index.</p>
+  </div>
+</section>

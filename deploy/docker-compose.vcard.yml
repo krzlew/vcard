@@ -1,0 +1,28 @@
+# Reference only — not deployed automatically.
+#
+# This is the service block to add to (or use in place of the `whoami`
+# service in) the compose file that already lives on the host running
+# Traefik. Reconcile the network name and any existing middleware
+# labels against that real file — this repo has no visibility into it.
+#
+# The image lives on GitHub Container Registry. If the package is
+# private, the deploy host needs `docker login ghcr.io` first (a PAT
+# with read:packages works) — or set the package visibility to public
+# in its GitHub package settings once the repo itself is public.
+
+services:
+  vcard:
+    image: ghcr.io/krzlew/vcard:latest
+    restart: unless-stopped
+    networks:
+      - traefik_public # replace with your actual Traefik network name
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.vcard.rule=Host(`htsh.pl`)
+      - traefik.http.routers.vcard.entrypoints=websecure
+      - traefik.http.routers.vcard.tls.certresolver=letsencrypt # replace with your resolver name
+      - traefik.http.services.vcard.loadbalancer.server.port=80
+
+networks:
+  traefik_public:
+    external: true

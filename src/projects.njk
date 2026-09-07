@@ -1,0 +1,25 @@
+---
+layout: layouts/base.njk
+pageNumber: P300
+extensionText: PROJECTS
+permalink: /projects/
+title: Projects
+summary: Personal and homelab projects by Krzysztof Lewczuk.
+---
+<section class="content content-full">
+  <div class="project-index">
+    <p class="section-marker">PROJECTS &amp; LAB WORK</p>
+
+    {% for project in collections.projects | reverse %}
+    <article class="project-card">
+      <div class="project-head">
+        <span class="entry-number">{{ project.data.number }}.</span>
+        <a class="entry-title" href="{{ project.url }}">{{ project.data.title }}</a>
+      </div>
+      <p class="project-summary">{{ project.data.summary }}</p>
+      <p class="project-tech">TECH: {{ project.data.tech }}</p>
+      <p class="project-status">STATUS: {{ project.data.status }}</p>
+    </article>
+    {% endfor %}
+  </div>
+</section>

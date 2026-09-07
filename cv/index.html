@@ -1,0 +1,1411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Krzysztof Lewczuk — Senior DevOps Engineer</title>
+    <meta name="description" content="CV of Krzysztof Lewczuk, Senior DevOps Engineer — cloud infrastructure, containers, CI/CD, and infrastructure as code.">
+    <link rel="canonical" href="https://htsh.pl/cv/">
+    <meta property="og:type" content="profile">
+    <meta property="og:title" content="Krzysztof Lewczuk — Senior DevOps Engineer">
+    <meta property="og:description" content="CV of Krzysztof Lewczuk, Senior DevOps Engineer — cloud infrastructure, containers, CI/CD, and infrastructure as code.">
+    <meta property="og:url" content="https://htsh.pl/cv/">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Krzysztof Lewczuk — Senior DevOps Engineer">
+    <meta name="twitter:description" content="CV of Krzysztof Lewczuk, Senior DevOps Engineer — cloud infrastructure, containers, CI/CD, and infrastructure as code.">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        /* ============================================
+           CSS VARIABLES — THEME SYSTEM
+           ============================================ */
+        :root {
+            --bg: #f8f9fb;
+            --surface: #ffffff;
+            --surface-hover: #f0f2f5;
+            --border: #e2e5ea;
+            --text-primary: #1a1d23;
+            --text-secondary: #5c6270;
+            --accent: #2563eb;
+            --accent-soft: rgba(37, 99, 235, 0.08);
+            --accent-glow: rgba(37, 99, 235, 0.15);
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.04);
+            --shadow-md: 0 4px 12px rgba(37, 99, 235, 0.08);
+            --shadow-lg: 0 8px 24px rgba(37, 99, 235, 0.1);
+            --toggle-bg: #e2e5ea;
+            --toggle-icon: #5c6270;
+            --badge-bg: var(--accent-soft);
+            --badge-color: var(--accent);
+        }
+
+        [data-theme="dark"] {
+            --bg: #0f1117;
+            --surface: #161922;
+            --surface-hover: #1c1f2a;
+            --border: #232733;
+            --text-primary: #e2e4e9;
+            --text-secondary: #8b92a8;
+            --accent: #60a5fa;
+            --accent-soft: rgba(96, 165, 250, 0.1);
+            --accent-glow: rgba(96, 165, 250, 0.18);
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.2);
+            --shadow-md: 0 4px 12px rgba(96, 165, 250, 0.08);
+            --shadow-lg: 0 8px 24px rgba(96, 165, 250, 0.1);
+            --toggle-bg: #232733;
+            --toggle-icon: #8b92a8;
+            --badge-bg: rgba(96, 165, 250, 0.12);
+            --badge-color: #60a5fa;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: var(--bg);
+            color: var(--text-primary);
+            line-height: 1.6;
+            min-height: 100vh;
+            transition: background 0.3s ease, color 0.3s ease;
+        }
+
+        .container {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 40px 24px;
+        }
+
+        /* ============================================
+           THEME TOGGLE
+           ============================================ */
+        .theme-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            border: 1px solid var(--border);
+            background: var(--surface);
+            color: var(--toggle-icon);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            z-index: 1000;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .theme-toggle:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+            transform: scale(1.05);
+            box-shadow: 0 0 16px var(--accent-glow);
+        }
+
+        /* ============================================
+           WINDOWS 98 VARIANT LINK
+           ============================================ */
+        .win98-link {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            z-index: 1000;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 9px 14px;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            background: var(--surface);
+            color: var(--text-secondary);
+            font-size: 0.78rem;
+            font-weight: 500;
+            text-decoration: none;
+            box-shadow: var(--shadow-sm);
+            transition: all 0.25s ease;
+        }
+
+        .win98-link:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+            box-shadow: var(--shadow-md);
+            transform: translateY(-2px);
+        }
+
+        .win98-link i {
+            font-size: 1rem;
+        }
+
+        /* ============================================
+           BACK TO HTSH.PL LINK
+           ============================================ */
+        .htsh-link {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 1000;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 9px 14px;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            background: var(--surface);
+            color: var(--text-secondary);
+            font-size: 0.78rem;
+            font-weight: 500;
+            text-decoration: none;
+            box-shadow: var(--shadow-sm);
+            transition: all 0.25s ease;
+        }
+
+        .htsh-link:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+            box-shadow: var(--shadow-md);
+            transform: translateY(-2px);
+        }
+
+        .htsh-link i {
+            font-size: 1rem;
+        }
+
+        /* ============================================
+           PRINT BUTTON
+           ============================================ */
+        .print-btn {
+            position: fixed;
+            top: 72px;
+            right: 20px;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            border: 1px solid var(--border);
+            background: var(--surface);
+            color: var(--toggle-icon);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            z-index: 1000;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .print-btn:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+            transform: scale(1.05);
+            box-shadow: 0 0 16px var(--accent-glow);
+        }
+
+        /* ============================================
+           HEADER — IDENTITY CARD
+           ============================================ */
+        header {
+            text-align: center;
+            margin-bottom: 48px;
+            padding-bottom: 40px;
+            border-bottom: 1px solid var(--border);
+            position: relative;
+        }
+
+        .avatar {
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(135deg, var(--accent-soft), var(--accent-glow));
+            border: 2px solid var(--accent);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--accent);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .avatar:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 24px var(--accent-glow);
+        }
+
+        h1 {
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+            letter-spacing: -0.5px;
+            transition: color 0.3s;
+        }
+
+        .title {
+            color: var(--accent);
+            font-weight: 500;
+            font-size: 1.15rem;
+            margin-bottom: 8px;
+        }
+
+        .location {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-bottom: 20px;
+        }
+
+        .location i {
+            margin-right: 6px;
+            color: var(--accent);
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 14px;
+            flex-wrap: wrap;
+        }
+
+        .social-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 1.2rem;
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.25s ease;
+        }
+
+        .social-links a:hover {
+            color: var(--accent);
+            border-color: var(--accent);
+            background: var(--accent-soft);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px var(--accent-glow);
+        }
+
+        .social-links a .label {
+            display: none;
+        }
+
+        /* ============================================
+           SECTION BASE
+           ============================================ */
+        section {
+            margin-bottom: 44px;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .section-header i {
+            color: var(--accent);
+            font-size: 1.1rem;
+            width: 28px;
+            height: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--accent-soft);
+            border-radius: 6px;
+        }
+
+        .section-header h2 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--text-primary);
+        }
+
+        /* ============================================
+           ABOUT
+           ============================================ */
+        .about-text {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.8;
+        }
+
+        .about-highlights {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 12px;
+            margin-top: 20px;
+        }
+
+        .about-highlight {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 16px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            box-shadow: var(--shadow-sm);
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+
+        .about-highlight:hover {
+            border-color: var(--accent);
+            box-shadow: var(--shadow-md);
+        }
+
+        .about-highlight i {
+            font-size: 1.2rem;
+            color: var(--accent);
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--accent-soft);
+            border-radius: 8px;
+            flex-shrink: 0;
+        }
+
+        .about-highlight span {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        /* ============================================
+           CONTACT CARD
+           ============================================ */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 12px;
+        }
+
+        .contact-item {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 18px 16px;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            text-decoration: none;
+            color: var(--text-secondary);
+            transition: all 0.25s ease;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .contact-item:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+            box-shadow: var(--shadow-md);
+            transform: translateY(-2px);
+        }
+
+        .contact-item i {
+            font-size: 1.2rem;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--accent-soft);
+            border-radius: 8px;
+            flex-shrink: 0;
+            color: var(--accent);
+        }
+
+        .contact-item .contact-label {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-weight: 500;
+            display: block;
+            margin-bottom: 2px;
+        }
+
+        .contact-item .contact-value {
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: var(--text-primary);
+        }
+
+        .contact-item:hover .contact-value {
+            color: var(--accent);
+        }
+
+        /* ============================================
+           SKILLS
+           ============================================ */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .skill-category {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 20px;
+            transition: all 0.25s ease;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .skill-category:hover {
+            border-color: var(--accent);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .skill-category h3 {
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 14px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .skill-category h3 i {
+            font-size: 0.9rem;
+        }
+
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .skill-tag {
+            background: var(--bg);
+            border: 1px solid var(--border);
+            color: var(--text-secondary);
+            padding: 5px 12px;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+
+        .skill-tag:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+            background: var(--accent-soft);
+        }
+
+        /* ============================================
+           EXPERIENCE — TIMELINE
+           ============================================ */
+        .timeline {
+            position: relative;
+        }
+
+        .timeline-item {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 16px;
+            transition: border-color 0.2s, box-shadow 0.2s;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .timeline-item:hover {
+            border-color: var(--accent);
+            box-shadow: var(--shadow-md);
+        }
+
+        .timeline-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 6px;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .timeline-header h3 {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .timeline-date {
+            font-size: 0.8rem;
+            color: var(--badge-color);
+            background: var(--badge-bg);
+            padding: 3px 10px;
+            border-radius: 20px;
+            font-weight: 500;
+            white-space: nowrap;
+        }
+
+        .timeline-company {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            margin-bottom: 10px;
+        }
+
+        .timeline-desc {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            line-height: 1.7;
+        }
+
+        .timeline-desc ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .timeline-desc li {
+            padding-left: 16px;
+            position: relative;
+            margin-bottom: 6px;
+        }
+
+        .timeline-desc li::before {
+            content: "›";
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+            font-weight: bold;
+        }
+
+        /* ============================================
+           FOOTER
+           ============================================ */
+        footer {
+            text-align: center;
+            padding-top: 40px;
+            border-top: 1px solid var(--border);
+            color: var(--text-secondary);
+            font-size: 0.8rem;
+        }
+
+        /* ============================================
+           PRINT STYLES — A4 CV
+           ============================================ */
+        @media print {
+            @page {
+                margin: 1.5cm 1.5cm 1.5cm 1.5cm;
+                size: A4;
+            }
+
+            body {
+                background: #ffffff !important;
+                color: #1a1d23 !important;
+                font-size: 9.5pt;
+                line-height: 1.45;
+            }
+
+            .container {
+                max-width: 100%;
+                padding: 0;
+                margin: 0;
+            }
+
+            /* Hide interactive elements */
+            .theme-toggle,
+            .print-btn,
+            .win98-link,
+            .htsh-link,
+            footer {
+                display: none !important;
+            }
+
+            /* Header print — compact */
+            header {
+                text-align: left !important;
+                margin-bottom: 16px !important;
+                padding-bottom: 12px !important;
+                border-bottom: 2px solid #1a1d23 !important;
+                display: flex !important;
+                align-items: center !important;
+                gap: 16px !important;
+                flex-wrap: wrap !important;
+            }
+
+            .avatar {
+                width: 48px !important;
+                height: 48px !important;
+                font-size: 18px !important;
+                margin: 0 !important;
+                border: 1px solid #2563eb !important;
+                background: rgba(37, 99, 235, 0.08) !important;
+                flex-shrink: 0 !important;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+
+            header > div:not(.avatar):not(.social-links) {
+                flex: 1 !important;
+                text-align: left !important;
+            }
+
+            h1 {
+                font-size: 16pt !important;
+                margin-bottom: 2px !important;
+                text-align: left !important;
+            }
+
+            .title {
+                font-size: 10pt !important;
+                color: #2563eb !important;
+                margin-bottom: 2px !important;
+                text-align: left !important;
+            }
+
+            .location {
+                font-size: 8.5pt !important;
+                color: #5c6270 !important;
+                margin-bottom: 0 !important;
+                text-align: left !important;
+            }
+
+            .social-links {
+                display: flex !important;
+                gap: 4px !important;
+                justify-content: flex-start !important;
+                margin-left: auto !important;
+            }
+            .social-links a {
+                width: auto !important;
+                height: auto !important;
+                background: none !important;
+                border: none !important;
+                border-radius: 0 !important;
+                font-size: 8.5pt !important;
+                color: #5c6270 !important;
+                display: inline-flex !important;
+                align-items: center !important;
+                gap: 4px !important;
+                padding: 2px 6px !important;
+                box-shadow: none !important;
+                transform: none !important;
+            }
+
+            .social-links a:hover {
+                transform: none !important;
+                box-shadow: none !important;
+            }
+
+            .social-links a .label {
+                display: inline !important;
+            }
+
+            .social-links a i {
+                font-size: 8pt !important;
+            }
+
+            /* Reset all cards to flat */
+            .skill-category,
+            .timeline-item,
+            .contact-item,
+            .about-highlight {
+                background: #ffffff !important;
+                border: none !important;
+                box-shadow: none !important;
+                padding: 0 !important;
+                margin-bottom: 10px !important;
+                border-radius: 0 !important;
+                page-break-inside: avoid;
+            }
+
+            .skill-category:hover,
+            .timeline-item:hover,
+            .contact-item:hover,
+            .about-highlight:hover {
+                transform: none !important;
+                box-shadow: none !important;
+                border-color: transparent !important;
+            }
+
+            /* Skills print — compact inline */
+            .skills-grid {
+                display: block !important;
+            }
+
+            .skill-category {
+                margin-bottom: 3px !important;
+                padding: 0 !important;
+                page-break-inside: avoid;
+            }
+
+            .skill-category h3 {
+                display: inline !important;
+                font-size: 8.5pt !important;
+                font-weight: 600 !important;
+                color: #1a1d23 !important;
+                margin: 0 !important;
+                border: none !important;
+                padding: 0 !important;
+            }
+
+            .skill-category h3 i {
+                display: none !important;
+            }
+
+            .skill-category h3::after {
+                content: ": ";
+            }
+
+            .skill-tags {
+                display: inline !important;
+                gap: 0 !important;
+            }
+
+            .skill-tag {
+                display: inline !important;
+                background: none !important;
+                border: none !important;
+                color: #374151 !important;
+                padding: 0 !important;
+                font-size: 8pt !important;
+                font-weight: 400 !important;
+                border-radius: 0 !important;
+            }
+
+            .skill-tag:hover {
+                border-color: transparent !important;
+                color: #374151 !important;
+                background: none !important;
+            }
+
+            .skill-tag:not(:last-child)::after {
+                content: ", ";
+                white-space: normal;
+            }
+
+            /* Timeline print */
+            .timeline {
+                display: block !important;
+            }
+
+            .timeline-item {
+                margin-bottom: 14px !important;
+                border-bottom: 1px solid #e2e5ea !important;
+                padding-bottom: 10px !important;
+            }
+
+            .timeline-header {
+                display: flex !important;
+                justify-content: space-between !important;
+                margin-bottom: 2px !important;
+            }
+
+            .timeline-header h3 {
+                font-size: 10pt !important;
+                font-weight: 600 !important;
+                color: #1a1d23 !important;
+            }
+
+            .timeline-date {
+                background: none !important;
+                color: #5c6270 !important;
+                padding: 0 !important;
+                font-size: 8pt !important;
+            }
+
+            .timeline-company {
+                font-size: 9pt !important;
+                color: #5c6270 !important;
+                margin-bottom: 4px !important;
+                font-style: italic;
+            }
+
+            .timeline-desc {
+                font-size: 8.5pt !important;
+                color: #374151 !important;
+                line-height: 1.45 !important;
+            }
+
+            .timeline-desc li {
+                margin-bottom: 2px !important;
+                padding-left: 10px !important;
+            }
+
+            .timeline-desc li::before {
+                color: #2563eb !important;
+            }
+
+            /* Contact print */
+            .contact-grid {
+                display: grid !important;
+                grid-template-columns: repeat(2, 1fr) !important;
+                gap: 4px !important;
+            }
+
+            .contact-item {
+                display: flex !important;
+                align-items: center !important;
+                gap: 8px !important;
+                color: #374151 !important;
+                text-decoration: none !important;
+                padding: 4px 0 !important;
+                margin-bottom: 0 !important;
+                border-bottom: none !important;
+            }
+
+            .contact-item i {
+                width: 18px !important;
+                height: 18px !important;
+                font-size: 0.8rem !important;
+                background: none !important;
+                color: #2563eb !important;
+                border-radius: 0 !important;
+            }
+
+            .contact-item .contact-label {
+                display: none !important;
+            }
+
+            .contact-item .contact-value {
+                font-size: 8.5pt !important;
+                color: #374151 !important;
+            }
+
+            /* About print */
+            .about-text {
+                font-size: 9pt !important;
+                color: #374151 !important;
+                margin-bottom: 6px !important;
+            }
+
+            .about-highlights {
+                display: block !important;
+                margin-top: 0 !important;
+            }
+
+            .about-highlight {
+                display: inline !important;
+                padding: 0 !important;
+                margin: 0 !important;
+                border: none !important;
+                border-radius: 0 !important;
+                background: none !important;
+                box-shadow: none !important;
+                color: #374151 !important;
+                font-size: 8.5pt !important;
+            }
+
+            .about-highlight i {
+                display: none !important;
+            }
+
+            .about-highlight:not(:last-child)::after {
+                content: " · ";
+                color: #5c6270;
+            }
+
+            /* Section headers print */
+            .section-header {
+                margin-bottom: 8px !important;
+                padding-bottom: 4px !important;
+                border-bottom: 1px solid #e2e5ea !important;
+            }
+
+            .section-header h2 {
+                font-size: 9.5pt !important;
+                color: #1a1d23 !important;
+            }
+
+            .section-header i {
+                width: 20px !important;
+                height: 20px !important;
+                font-size: 0.8rem !important;
+                background: #f0f2f5 !important;
+                color: #2563eb !important;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+
+            section {
+                margin-bottom: 14px !important;
+            }
+
+            /* Page break controls */
+            .skill-category,
+            .timeline-item {
+                page-break-inside: avoid;
+            }
+
+            section {
+                page-break-before: auto;
+            }
+        }
+
+        /* ============================================
+           RESPONSIVE
+           ============================================ */
+        @media (max-width: 640px) {
+            .container {
+                padding: 24px 16px;
+            }
+            h1 {
+                font-size: 1.6rem;
+            }
+            .timeline-header {
+                flex-direction: column;
+            }
+            .theme-toggle {
+                top: 12px;
+                right: 12px;
+                width: 40px;
+                height: 40px;
+            }
+            .print-btn {
+                top: 60px;
+                right: 12px;
+                width: 40px;
+                height: 40px;
+            }
+            .social-links a {
+                width: 38px;
+                height: 38px;
+                font-size: 1rem;
+            }
+            .about-highlights {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <a class="htsh-link" href="/" title="Back to htsh.pl">
+        <i class="fas fa-arrow-left"></i>
+        htsh.pl
+    </a>
+
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+        <i class="fas fa-moon" id="themeIcon"></i>
+    </button>
+    <button class="print-btn" id="printBtn" aria-label="Print CV" onclick="window.print()">
+        <i class="fas fa-print"></i>
+    </button>
+
+    <a class="win98-link" href="windows98.html" title="View this CV as a Windows 98 application">
+        <i class="fas fa-window-restore"></i>
+        Windows 98 version
+    </a>
+
+    <div class="container">
+        <!-- ============================================
+             HEADER
+             ============================================ -->
+        <header>
+            <div class="avatar">KL</div>
+            <h1>Krzysztof Lewczuk</h1>
+            <div class="title">Senior DevOps Engineer</div>
+            <div class="location">
+                <i class="fas fa-map-marker-alt"></i>Wrocław, Poland · Remote Friendly
+            </div>
+            <div class="social-links">
+                <a href="mailto:kontakt@htsh.pl" title="Email">
+                    <i class="fas fa-envelope"></i>
+                    <span class="label">Email</span>
+                </a>
+                <a href="https://linkedin.com/in/krzysztof-lewczuk" target="_blank" rel="noopener" title="LinkedIn">
+                    <i class="fab fa-linkedin-in"></i>
+                    <span class="label">LinkedIn</span>
+                </a>
+                <a href="https://github.com/krzlew" target="_blank" rel="noopener" title="GitHub">
+                    <i class="fab fa-github"></i>
+                    <span class="label">GitHub</span>
+                </a>
+                <a href="https://htsh.pl" target="_blank" rel="noopener" title="htsh.pl">
+                    <i class="fas fa-globe"></i>
+                    <span class="label">htsh.pl</span>
+                </a>
+            </div>
+        </header>
+
+        <!-- ============================================
+             ABOUT
+             ============================================ -->
+        <section id="about">
+            <div class="section-header">
+                <i class="fas fa-user"></i>
+                <h2>About</h2>
+            </div>
+            <p class="about-text">
+                Self-taught, into computers since I can remember. I work across the dev/ops
+                boundary — writing the infrastructure code one day, debugging what broke in
+                production the next. Hands-on experience spans cloud infrastructure, container
+                orchestration, CI/CD pipelines, and system administration, from bare metal to
+                multi-cloud.
+            </p>
+            <div class="about-highlights">
+                <div class="about-highlight">
+                    <i class="fas fa-cloud"></i>
+                    <span>Multi-cloud infrastructure (AWS, Azure, OpenStack)</span>
+                </div>
+                <div class="about-highlight">
+                    <i class="fas fa-dharmachakra"></i>
+                    <span>Kubernetes &amp; Docker orchestration</span>
+                </div>
+                <div class="about-highlight">
+                    <i class="fas fa-rocket"></i>
+                    <span>CI/CD &amp; GitOps automation</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================
+             CONTACT
+             ============================================ -->
+        <section id="contact">
+            <div class="section-header">
+                <i class="fas fa-address-card"></i>
+                <h2>Contact</h2>
+            </div>
+            <div class="contact-grid">
+                <a href="mailto:kontakt@htsh.pl" class="contact-item">
+                    <i class="fas fa-envelope"></i>
+                    <div>
+                        <span class="contact-label">Email</span>
+                        <span class="contact-value">kontakt@htsh.pl</span>
+                    </div>
+                </a>
+                <a href="tel:+48503368326" class="contact-item">
+                    <i class="fas fa-phone"></i>
+                    <div>
+                        <span class="contact-label">Phone</span>
+                        <span class="contact-value">+48 503 368 326</span>
+                    </div>
+                </a>
+                <a href="https://linkedin.com/in/krzysztof-lewczuk" target="_blank" rel="noopener" class="contact-item">
+                    <i class="fab fa-linkedin-in"></i>
+                    <div>
+                        <span class="contact-label">LinkedIn</span>
+                        <span class="contact-value">/in/krzysztof-lewczuk</span>
+                    </div>
+                </a>
+                <a href="https://htsh.pl" target="_blank" rel="noopener" class="contact-item">
+                    <i class="fas fa-globe"></i>
+                    <div>
+                        <span class="contact-label">Website</span>
+                        <span class="contact-value">htsh.pl</span>
+                    </div>
+                </a>
+            </div>
+        </section>
+
+        <!-- ============================================
+             SKILLS
+             ============================================ -->
+        <section id="skills">
+            <div class="section-header">
+                <i class="fas fa-code"></i>
+                <h2>Technical Skills</h2>
+            </div>
+            <div class="skills-grid">
+                <div class="skill-category">
+                    <h3><i class="fas fa-cloud"></i> Cloud &amp; Infrastructure</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">AWS</span>
+                        <span class="skill-tag">Azure</span>
+                        <span class="skill-tag">DigitalOcean</span>
+                        <span class="skill-tag">OpenStack</span>
+                        <span class="skill-tag">Hetzner</span>
+                        <span class="skill-tag">Bare Metal</span>
+                        <span class="skill-tag">Proxmox</span>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h3><i class="fas fa-dharmachakra"></i> Containers &amp; Orchestration</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Docker</span>
+                        <span class="skill-tag">Kubernetes</span>
+                        <span class="skill-tag">K3s</span>
+                        <span class="skill-tag">Rancher</span>
+                        <span class="skill-tag">Helm</span>
+                        <span class="skill-tag">Docker Swarm</span>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h3><i class="fas fa-cogs"></i> CI/CD &amp; Automation</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">GitLab CI</span>
+                        <span class="skill-tag">GitHub Actions</span>
+                        <span class="skill-tag">Jenkins</span>
+                        <span class="skill-tag">Packer</span>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h3><i class="fas fa-file-code"></i> Infrastructure as Code</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Terraform</span>
+                        <span class="skill-tag">Ansible</span>
+                        <span class="skill-tag">CloudFormation</span>
+                        <span class="skill-tag">Puppet</span>
+                        <span class="skill-tag">HCL</span>
+                        <span class="skill-tag">YAML</span>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h3><i class="fas fa-terminal"></i> Languages &amp; Databases</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Python</span>
+                        <span class="skill-tag">PHP</span>
+                        <span class="skill-tag">Bash</span>
+                        <span class="skill-tag">PowerShell</span>
+                        <span class="skill-tag">MySQL</span>
+                        <span class="skill-tag">MSSQL</span>
+                        <span class="skill-tag">PostgreSQL</span>
+                        <span class="skill-tag">MongoDB</span>
+                        <span class="skill-tag">Redis</span>
+                        <span class="skill-tag">Elasticsearch</span>
+                        <span class="skill-tag">RabbitMQ</span>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h3><i class="fas fa-chart-line"></i> Monitoring &amp; Observability</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Zabbix</span>
+                        <span class="skill-tag">Sentry</span>
+                        <span class="skill-tag">Nagios</span>
+                        <span class="skill-tag">Grafana</span>
+                        <span class="skill-tag">Prometheus</span>
+                        <span class="skill-tag">Loki</span>
+                        <span class="skill-tag">Alertmanager</span>
+                        <span class="skill-tag">CloudWatch</span>
+                        <span class="skill-tag">PagerDuty</span>
+                        <span class="skill-tag">SonarQube</span>
+                        <span class="skill-tag">Nexus</span>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h3><i class="fas fa-server"></i> Systems &amp; Networking</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Linux</span>
+                        <span class="skill-tag">Debian</span>
+                        <span class="skill-tag">Ubuntu</span>
+                        <span class="skill-tag">CentOS</span>
+                        <span class="skill-tag">RHEL</span>
+                        <span class="skill-tag">Nginx</span>
+                        <span class="skill-tag">HAProxy</span>
+                        <span class="skill-tag">Keepalived</span>
+                        <span class="skill-tag">OpenVPN</span>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h3><i class="fas fa-robot"></i> AI</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">llama.cpp</span>
+                        <span class="skill-tag">n8n</span>
+                        <span class="skill-tag">LiteLLM</span>
+                        <span class="skill-tag">ComfyUI</span>
+                        <span class="skill-tag">MLX</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================
+             EXPERIENCE
+             ============================================ -->
+        <section id="experience">
+            <div class="section-header">
+                <i class="fas fa-briefcase"></i>
+                <h2>Experience</h2>
+            </div>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-header">
+                        <h3>Senior DevOps Engineer</h3>
+                        <span class="timeline-date">Oct 2023 — Present</span>
+                    </div>
+                    <div class="timeline-company">Thaumatec Tech Group · Wrocław, Poland</div>
+                    <div class="timeline-desc">
+                        <ul>
+                            <li>Leading DevOps practices and cloud infrastructure strategy</li>
+                            <li>Managing CI/CD pipelines, container orchestration, and cloud resource provisioning</li>
+                            <li>Introduced automation and infrastructure-as-code practices across teams</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-header">
+                        <h3>Owner</h3>
+                        <span class="timeline-date">Jan 2018 — Present</span>
+                    </div>
+                    <div class="timeline-company">HTSH · Poland</div>
+                    <div class="timeline-desc">
+                        <ul>
+                            <li>Running independent DevOps consultancy and web development services</li>
+                            <li>Managing cloud infrastructure and automation for clients</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-header">
+                        <h3>Senior DevOps Engineer</h3>
+                        <span class="timeline-date">Aug 2022 — Aug 2023</span>
+                    </div>
+                    <div class="timeline-company">Eviden · Wrocław, Poland</div>
+                    <div class="timeline-desc">
+                        <ul>
+                            <li>Led infrastructure automation and cloud operations</li>
+                            <li>Managed CI/CD pipelines, container deployments, and system reliability</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-header">
+                        <h3>DevOps Engineer</h3>
+                        <span class="timeline-date">Sep 2020 — Jun 2022</span>
+                    </div>
+                    <div class="timeline-company">Star (acquired by Pro4People) · Wrocław, Poland</div>
+                    <div class="timeline-desc">
+                        <ul>
+                            <li>Developed and maintained medical products (Software as Medical Device) based on QMS compliance with all applicable regulations and standards</li>
+                            <li>Deployed and maintained SDLC and PLC environments</li>
+                            <li>Developed Infrastructure as Code with Terraform and AWS provider (VPC, EC2, Auto Scaling, RDS, S3, Route53, Lambda, CloudFront, CloudWatch, AMI, AWS Backup)</li>
+                            <li>Implemented and maintained build environment — Jenkins, SonarQube, Nexus repository, Packer, Ansible, OpenVPN</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-header">
+                        <h3>DevOps Engineer</h3>
+                        <span class="timeline-date">May 2019 — Jun 2020</span>
+                    </div>
+                    <div class="timeline-company">NeuroSYS · Wrocław Area, Poland</div>
+                    <div class="timeline-desc">
+                        <ul>
+                            <li>Deployed and maintained products written in PHP, .NET, and Node.js — served via direct deployment, Docker containers, and Helm charts on Kubernetes</li>
+                            <li>Configuration management with Terraform, Ansible, and code deployment using GitLab CI</li>
+                            <li>Managed public cloud, private cloud, and dedicated server infrastructure (AWS, Azure, DigitalOcean, OpenStack, Hetzner)</li>
+                            <li>Built and deployed Docker containers to break up monolithic apps into microservices, improving developer workflow and scalability</li>
+                            <li>Installed and configured Zabbix and Sentry for infrastructure and application error monitoring</li>
+                            <li>Set up on-premises Kubernetes cluster for development and GitLab CI runners with shared cache</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-header">
+                        <h3>DevOps Engineer</h3>
+                        <span class="timeline-date">Feb 2019 — Apr 2019</span>
+                    </div>
+                    <div class="timeline-company">The Coders · Wrocław Area, Poland</div>
+                    <div class="timeline-desc">
+                        <ul>
+                            <li>Short-term contract to prepare highly available environment for a web application</li>
+                            <li>Designed and implemented infrastructure based on OpenStack private cloud with Terraform and Ansible</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-header">
+                        <h3>System Administrator</h3>
+                        <span class="timeline-date">Jan 2018 — Jan 2019</span>
+                    </div>
+                    <div class="timeline-company">Piwik PRO · Wrocław, Poland</div>
+                    <div class="timeline-desc">
+                        <ul>
+                            <li>Deployed and maintained a new product based on Docker Containers, Rancher Orchestrator, Linux, Ansible on on-premises (bare metal, VMs) and public cloud (AWS, Azure) infrastructure</li>
+                            <li>Deployed and maintained a legacy product based on Linux, Keepalived, HAProxy, Nginx, php-fpm, MySQL/MariaDB, Nagios, Puppet on on-premises and cloud infrastructure</li>
+                            <li>Maintained various Linux environments (Debian, Ubuntu, CentOS, RHEL)</li>
+                            <li>Migrated customer data from legacy product to the new product</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-header">
+                        <h3>IT Specialist</h3>
+                        <span class="timeline-date">Mar 2015 — Jan 2018</span>
+                    </div>
+                    <div class="timeline-company">ASAJ · Siedlce, Poland</div>
+                    <div class="timeline-desc">
+                        <ul>
+                            <li>Implemented and maintained a Windows domain-based infrastructure</li>
+                            <li>Led migration to a virtualized environment</li>
+                            <li>Configured, installed, and maintained hardware/software equipment including routers and switches at 19 locations</li>
+                            <li>Built several internal PHP applications integrated with CRM/ERP systems</li>
+                            <li>Automated redundant tasks using PowerShell</li>
+                            <li>Worked with employees to resolve complex support requests</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-header">
+                        <h3>IT Specialist</h3>
+                        <span class="timeline-date">Mar 2013 — Mar 2015</span>
+                    </div>
+                    <div class="timeline-company">SEDKOMP Sp. Jawna Sawicki, Sikora · Siedlce, Poland</div>
+                    <div class="timeline-desc">
+                        <ul>
+                            <li>Performed maintenance, troubleshooting, and repair on desktop/laptop PCs and networks</li>
+                            <li>Configured, deployed, and maintained CRM, WMS, and ERP systems</li>
+                            <li>Resolved technical issues on-site and remotely</li>
+                            <li>Created websites using WordPress and Joomla</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================
+             FOOTER
+             ============================================ -->
+        <footer>
+            <p>Built with HTML &amp; CSS · <a href="#" onclick="window.print(); return false;" style="color:var(--accent);text-decoration:none;">Print CV</a></p>
+        </footer>
+    </div>
+
+    <script>
+        // Theme toggle
+        const toggle = document.getElementById('themeToggle');
+        const icon = document.getElementById('themeIcon');
+        const html = document.documentElement;
+
+        const savedTheme = localStorage.getItem('theme');
+        const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+        if (savedTheme === 'dark' || (!savedTheme && systemDark)) {
+            html.setAttribute('data-theme', 'dark');
+            icon.className = 'fas fa-sun';
+        }
+
+        toggle.addEventListener('click', () => {
+            const isDark = html.getAttribute('data-theme') === 'dark';
+            if (isDark) {
+                html.removeAttribute('data-theme');
+                localStorage.setItem('theme', 'light');
+                icon.className = 'fas fa-moon';
+            } else {
+                html.setAttribute('data-theme', 'dark');
+                localStorage.setItem('theme', 'dark');
+                icon.className = 'fas fa-sun';
+            }
+        });
+    </script>
+</body>
+</html>

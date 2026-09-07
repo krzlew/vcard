@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>{{ title }}{% if page.url != "/" %} — {{ site.title }}{% endif %}</title>
+  <meta name="description" content="{{ summary or site.description }}">
+  {% if robotsNoindex %}<meta name="robots" content="noindex">{% endif %}
+
+  <link rel="canonical" href="{{ site.url }}{{ page.url }}">
+  <meta property="og:type" content="{% if page.url == '/' %}website{% else %}article{% endif %}">
+  <meta property="og:title" content="{{ title }}">
+  <meta property="og:description" content="{{ summary or site.description }}">
+  <meta property="og:url" content="{{ site.url }}{{ page.url }}">
+  <meta property="og:site_name" content="{{ site.title }}">
+  <meta property="og:image" content="{{ site.url }}/avatar-pixel.png">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="{{ title }}">
+  <meta name="twitter:description" content="{{ summary or site.description }}">
+  <meta name="twitter:image" content="{{ site.url }}/avatar-pixel.png">
+
+  <link rel="stylesheet" href="/style.css">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="alternate" type="application/rss+xml" title="HTSH.PL Blog (RSS)" href="/feed.xml">
+  <link rel="alternate" type="application/atom+xml" title="HTSH.PL Blog (Atom)" href="/atom.xml">
+</head>
+
+<body>
+  <main class="page">
+
+    <header class="topbar">
+      <div class="page-number" id="page-number" data-default="{{ pageNumber }}">{{ pageNumber }}</div>
+      <div class="page-number-plain" id="page-number-plain" data-default="{{ pageNumber | stripP }}">{{ pageNumber | stripP }}</div>
+      <div class="subpage">{{ (subpage or 1) | pad2 }}/{{ (subpageTotal or 1) | pad2 }}</div>
+      <div class="title"><a href="/">HTSH.PL</a></div>
+      <div class="clock" id="clock"><span class="clock-date">--- --</span> --:--:--</div>
+    </header>
+
+    <section class="masthead" aria-label="HTSH.PL">
+      <a class="logo-blocks" href="/" aria-label="HTSH.PL home">
+        <span class="logo-block">H</span>
+        <span class="logo-block">T</span>
+        <span class="logo-block">S</span>
+        <span class="logo-block">H</span>
+        <span class="logo-block">.</span>
+        <span class="logo-block">P</span>
+        <span class="logo-block">L</span>
+      </a>
+
+      <div class="logo-extension">{% if extensionText %}<span>{{ extensionText }}</span>{% else %}&nbsp;{% endif %}</div>
+    </section>
+
+    {{ content | safe }}
+
+    <footer>
+      <nav aria-label="Quick links">
+        <ul class="footer-nav">
+          <li><a href="/cv/">CV</a></li>
+          <li><a href="/blog/">BLOG</a></li>
+          <li><a href="/projects/">PROJECTS</a></li>
+          <li><a
+            href="https://www.linkedin.com/in/krzysztof-lewczuk/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >LINKEDIN</a></li>
+        </ul>
+      </nav>
+    </footer>
+
+  </main>
+
+  <div class="scanlines" aria-hidden="true"></div>
+
+  <script>window.PAGE_MAP = {
+    {%- for p in collections.numbered -%}
+    "{{ p.number }}": "{{ p.url }}"{% if not loop.last %},{% endif %}
+    {%- endfor -%}
+  };</script>
+  <script src="/script.js"></script>
+</body>
+</html>
