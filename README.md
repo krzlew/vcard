@@ -86,7 +86,8 @@ Traefik-side service block, not something this repo deploys directly.
 
 ## Credits
 
-The teletext design is inspired by [mattcrouch.net](https://www.mattcrouch.net/).
+- Teletext design and layout inspired by [mattcrouch.net](https://www.mattcrouch.net/), whose site also served as the source for the hosted `ModeSeven` font file used here.
+- `ModeSeven` itself was created by [Andrew C. Bulhak](https://departmentofplay.net/experiments/teletext/) and is freely distributable.
 
 ## License
 
