@@ -15,8 +15,14 @@ layout: layouts/base.njk
 <script type="application/ld+json">{{ {
   "@context": "https://schema.org",
   "@type": "BlogPosting",
+  "@id": site.url + page.url,
+  "mainEntityOfPage": { "@type": "WebPage", "@id": site.url + page.url },
   "headline": title,
+  "description": summary,
+  "image": site.url + "/avatar-pixel.png",
   "datePublished": date,
-  "author": { "@type": "Person", "name": site.author },
+  "dateModified": date,
+  "author": { "@type": "Person", "name": site.author, "url": site.url },
+  "publisher": { "@type": "Person", "name": site.author, "url": site.url },
   "url": site.url + page.url
 } | jsonStringify | safe }}</script>
