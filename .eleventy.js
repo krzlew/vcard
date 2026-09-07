@@ -1,7 +1,18 @@
 const pluginRss = require("@11ty/eleventy-plugin-rss").default;
+const crypto = require("crypto");
+const fs = require("fs");
+
+function fileHash(path) {
+  return crypto.createHash("md5").update(fs.readFileSync(path)).digest("hex").slice(0, 8);
+}
 
 module.exports = function (eleventyConfig) {
   eleventyConfig.addPlugin(pluginRss);
+
+  eleventyConfig.addGlobalData("assetVersion", {
+    css: fileHash("style.css"),
+    js: fileHash("script.js"),
+  });
 
   eleventyConfig.addPassthroughCopy("style.css");
   eleventyConfig.addPassthroughCopy("script.js");

@@ -23,7 +23,7 @@
   <meta name="twitter:description" content="{{ summary or site.description }}">
   <meta name="twitter:image" content="{{ site.url }}/avatar-pixel.png">
 
-  <link rel="stylesheet" href="/style.css">
+  <link rel="stylesheet" href="/style.css?v={{ assetVersion.css }}">
   <link rel="icon" type="image/svg+xml" href="/favicon.svg">
   <link rel="alternate" type="application/rss+xml" title="HTSH.PL Blog (RSS)" href="/feed.xml">
   <link rel="alternate" type="application/atom+xml" title="HTSH.PL Blog (Atom)" href="/atom.xml">
@@ -84,6 +84,6 @@
     "{{ p.number }}": "{{ p.url }}"{% if not loop.last %},{% endif %}
     {%- endfor -%}
   };</script>
-  <script src="/script.js"></script>
+  <script src="/script.js?v={{ assetVersion.js }}"></script>
 </body>
 </html>
