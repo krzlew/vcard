@@ -8,6 +8,10 @@ number: 304
 tech: React Native / Expo / TypeScript
 status: LEARNING
 summary: Ad-free puzzle games, built to learn Expo
+images:
+  - /images/projects/mahjong-sudoku/sudoku-main.jpg
+  - /images/projects/mahjong-sudoku/sudoku-win.jpg
+  - /images/projects/mahjong-sudoku/mahjong-game.jpg
 ---
 Two mobile puzzle games, built for the same reason: most free
 Mahjong/Sudoku apps on the stores are wall-to-wall ads. These are

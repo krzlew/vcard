@@ -10,6 +10,8 @@ status: ACTIVE
 summary: An interactive map of Polish castles and palaces
 link: https://zamki.htsh.pl
 linkLabel: zamki.htsh.pl
+images:
+  - /images/projects/polish-castles/index-view.png
 ---
 Exploring old castles, palaces, and fortresses is a personal hobby
 — this is that hobby turned into a proper interactive map.
