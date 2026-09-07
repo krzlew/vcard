@@ -84,6 +84,10 @@ push and expects `DEPLOY_HOST`, `DEPLOY_PORT`, `DEPLOY_USER`,
 `deploy/docker-compose.vcard.yml` is a reference template for the
 Traefik-side service block, not something this repo deploys directly.
 
+## Credits
+
+The teletext design is inspired by [mattcrouch.net](https://www.mattcrouch.net/).
+
 ## License
 
 MIT — see [LICENSE](LICENSE). That covers the code/template; the personal
