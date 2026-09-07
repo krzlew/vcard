@@ -10,6 +10,8 @@ status: ACTIVE
 summary: A book inventory — scan ISBNs, track what you own
 link: https://books.htsh.pl
 linkLabel: books.htsh.pl
+images:
+  - /images/projects/bookshelf/index-view.jpg
 ---
 Scan a book's ISBN and it goes into an inventory, no reading
 progress or star ratings involved. It exists purely to answer "do I

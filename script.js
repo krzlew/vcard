@@ -54,6 +54,32 @@ setInterval(updateClock, 1000);
   });
 })();
 
+(function lightbox() {
+  const box = document.getElementById("lightbox");
+  const boxImg = document.getElementById("lightbox-img");
+  if (!box || !boxImg) return;
+
+  function open(src, alt) {
+    boxImg.src = src;
+    boxImg.alt = alt || "";
+    box.hidden = false;
+  }
+
+  function close() {
+    box.hidden = true;
+    boxImg.src = "";
+  }
+
+  document.querySelectorAll(".project-shots img").forEach((img) => {
+    img.addEventListener("click", () => open(img.src, img.alt));
+  });
+
+  box.addEventListener("click", close);
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && !box.hidden) close();
+  });
+})();
+
 (function notFoundNumber() {
   const target = document.getElementById("not-found-code");
   if (!target) return;

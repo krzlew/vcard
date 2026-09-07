@@ -72,6 +72,10 @@
 
   <div class="scanlines" aria-hidden="true"></div>
 
+  <div class="lightbox" id="lightbox" hidden>
+    <img id="lightbox-img" src="" alt="">
+  </div>
+
   <script>window.PAGE_MAP = {
     {%- for p in collections.numbered -%}
     "{{ p.number }}": "{{ p.url }}"{% if not loop.last %},{% endif %}
