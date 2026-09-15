@@ -18,6 +18,7 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy("script.js");
   eleventyConfig.addPassthroughCopy("fonts");
   eleventyConfig.addPassthroughCopy("avatar-pixel.png");
+  eleventyConfig.addPassthroughCopy("avatar-pixel-small.png");
   eleventyConfig.addPassthroughCopy("favicon.svg");
   eleventyConfig.addPassthroughCopy("cv");
   eleventyConfig.addPassthroughCopy("images");
