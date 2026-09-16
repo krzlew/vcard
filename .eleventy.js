@@ -45,7 +45,7 @@ module.exports = function (eleventyConfig) {
       }));
     // cv/ is a passthrough-copied static folder, not an Eleventy template,
     // so it never shows up in collectionApi.getAll() - map its number by hand.
-    return [...fromPages, { number: "110", url: "/cv/" }];
+    return [...fromPages, { number: "112", url: "/cv/" }];
   });
 
   eleventyConfig.addFilter("jsonStringify", (obj) => JSON.stringify(obj));
