@@ -2,7 +2,7 @@
 layout: layouts/base.njk
 ---
 <section class="content content-full">
-  <div class="post-body">
+  <div class="post-body{% if columns %} two-col{% endif %}">
     {{ content | safe }}
   </div>
 </section>
