@@ -16,7 +16,10 @@ layout: layouts/base.njk
     {% if images and images.length %}
     <div class="project-shots">
       {% for image in images %}
-      <img src="{{ image }}" alt="{{ title }} screenshot" loading="lazy">
+      <picture>
+        <source srcset="{{ image | replace('.png', '.webp') | replace('.jpg', '.webp') }}" type="image/webp">
+        <img src="{{ image }}" alt="{{ title }} screenshot" loading="lazy">
+      </picture>
       {% endfor %}
     </div>
     {% endif %}
