@@ -145,3 +145,6 @@ a { color: inherit; text-decoration: none; }
   .role { display: block; margin-top: 8px; }
   .footer-nav { grid-template-columns: repeat(2, 1fr); row-gap: 17px; }
 }
+@media (prefers-reduced-motion: reduce) {
+  .topbar .clock .colon, .logo-extension span, .tagline { animation: none; }
+}
