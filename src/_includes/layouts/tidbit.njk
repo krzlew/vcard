@@ -1,0 +1,14 @@
+---
+layout: layouts/base.njk
+---
+<section class="content content-full">
+  <div class="post-body">
+    <pre class="post-meta"> TITLE: {{ title | upper }}
+ CREATED: {{ date | dateDisplay }}{% if updated %}
+ UPDATED: {{ updated | dateDisplay }}{% endif %}</pre>
+
+    {{ content | safe }}
+
+    <p class="post-nav">Type 500 for index.</p>
+  </div>
+</section>

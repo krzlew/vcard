@@ -1,0 +1,32 @@
+---
+layout: layouts/base.njk
+pageNumber: P500
+extensionText: TIDBITS INDEX
+permalink: /tidbits/
+title: Tidbits
+summary: Research, notes, observations, snippets, etc...
+---
+<section class="content content-full">
+  <div class="post-index">
+    <p class="section-marker">
+      <span>RESEARCH, NOTES, OBSERVATIONS, SNIPPETS</span>
+    </p>
+
+    {% for item in collections.tidbits | reverse %}
+    <article class="entry-row">
+      <div class="entry-head">
+        <span class="entry-number">{{ item.data.number }}</span>
+        <a class="entry-title" href="{{ item.url }}">{{ item.data.title }}</a>
+      </div>
+      <div class="entry-meta">
+        <span class="branch">&#9500;&#9472;&#9472;</span>
+        CREATED: {{ item.data.date | dateDisplay }}{% if item.data.updated %}&nbsp;&nbsp;&nbsp;UPDATED: {{ item.data.updated | dateDisplay }}{% endif %}{% if item.data.tags %}&nbsp;&nbsp;&nbsp;TAGS: {{ item.data.tags | join(" / ") }}{% endif %}
+      </div>
+      <div class="entry-summary">
+        <span class="branch">&#9492;&#9472;&#9472;</span>
+        {{ item.data.summary }}
+      </div>
+    </article>
+    {% endfor %}
+  </div>
+</section>

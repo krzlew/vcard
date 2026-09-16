@@ -31,6 +31,10 @@ module.exports = function (eleventyConfig) {
     collectionApi.getFilteredByGlob("src/projects/*.md").sort((a, b) => a.data.number - b.data.number)
   );
 
+  eleventyConfig.addCollection("tidbits", (collectionApi) =>
+    collectionApi.getFilteredByGlob("src/tidbits/*.md").sort((a, b) => a.data.number - b.data.number)
+  );
+
   eleventyConfig.addCollection("numbered", (collectionApi) => {
     const fromPages = collectionApi
       .getAll()
