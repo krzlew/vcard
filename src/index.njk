@@ -98,3 +98,13 @@ summary: Personal site of Krzysztof Lewczuk, a DevOps engineer working across CI
   </div>
 
 </section>
+
+<script type="application/ld+json">{{ {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "@id": site.url + "/",
+  "url": site.url + "/",
+  "name": site.title,
+  "description": summary,
+  "author": { "@type": "Person", "name": site.author, "url": site.url }
+} | jsonStringify | safe }}</script>
