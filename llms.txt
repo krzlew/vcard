@@ -1,0 +1,22 @@
+# HTSH.PL
+
+> Personal site of Krzysztof Lewczuk, a DevOps engineer working across CI/CD, cloud and on-prem infrastructure, and self-hosting.
+
+## Main
+
+- [About](https://htsh.pl/about/): Background, current role, and interests
+- [Contact](https://htsh.pl/contact/): Email, LinkedIn, GitHub
+- [CV](https://htsh.pl/cv/): Full resume
+
+## Content
+
+- [Blog](https://htsh.pl/blog/): Posts on DevOps, self-hosting, and homelab projects
+- [Projects](https://htsh.pl/projects/): Personal software projects
+- [Tidbits](https://htsh.pl/tidbits/): Smaller notes, observations, and research (e.g. local LLM benchmarks)
+- [Links](https://htsh.pl/links/): Curated external links, categorized
+
+## Optional
+
+- [RSS feed](https://htsh.pl/feed.xml)
+- [Atom feed](https://htsh.pl/atom.xml)
+- [Sitemap](https://htsh.pl/sitemap.xml)

@@ -4,6 +4,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <meta name="theme-color" content="#000000">
 
   <title>{{ title }}{% if page.url != "/" %} — {{ site.title }}{% endif %}</title>
   <meta name="description" content="{{ summary or site.description }}">
@@ -27,11 +29,16 @@
 
   <link rel="stylesheet" href="/style.css?v={{ assetVersion.css }}">
   <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="manifest" href="/manifest.json">
   <link rel="alternate" type="application/rss+xml" title="HTSH.PL Blog (RSS)" href="/feed.xml">
   <link rel="alternate" type="application/atom+xml" title="HTSH.PL Blog (Atom)" href="/atom.xml">
 </head>
 
 <body>
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+
   <main class="page">
 
     <header class="topbar">
@@ -44,18 +51,19 @@
 
     <section class="masthead" aria-label="HTSH.PL">
       <a class="logo-blocks" href="/" aria-label="HTSH.PL home">
-        <span class="logo-block">H</span>
-        <span class="logo-block">T</span>
-        <span class="logo-block">S</span>
-        <span class="logo-block">H</span>
-        <span class="logo-block">.</span>
-        <span class="logo-block">P</span>
-        <span class="logo-block">L</span>
+        <span class="logo-block" aria-hidden="true">H</span>
+        <span class="logo-block" aria-hidden="true">T</span>
+        <span class="logo-block" aria-hidden="true">S</span>
+        <span class="logo-block" aria-hidden="true">H</span>
+        <span class="logo-block" aria-hidden="true">.</span>
+        <span class="logo-block" aria-hidden="true">P</span>
+        <span class="logo-block" aria-hidden="true">L</span>
       </a>
 
       <div class="logo-extension">{% if extensionText %}<span>{{ extensionText }}</span>{% else %}&nbsp;{% endif %}</div>
     </section>
 
+    <div id="main-content"></div>
     {{ content | safe }}
 
     <footer>
@@ -85,7 +93,7 @@
   <script src="/script.js?v={{ assetVersion.js }}"></script>
 
   <noscript>
-    <img src="https://eye.htsh.pl/ingress/1a3a879a-c58b-4055-9079-3ccd41c849b0/pixel.gif">
+    <img src="https://eye.htsh.pl/ingress/1a3a879a-c58b-4055-9079-3ccd41c849b0/pixel.gif" alt="">
   </noscript>
   <script defer src="https://eye.htsh.pl/ingress/1a3a879a-c58b-4055-9079-3ccd41c849b0/script.js"></script>
 </body>
