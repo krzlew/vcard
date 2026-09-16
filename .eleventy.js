@@ -20,6 +20,10 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy("avatar-pixel.png");
   eleventyConfig.addPassthroughCopy("avatar-pixel-small.png");
   eleventyConfig.addPassthroughCopy("favicon.svg");
+  eleventyConfig.addPassthroughCopy("favicon.ico");
+  eleventyConfig.addPassthroughCopy("apple-touch-icon.png");
+  eleventyConfig.addPassthroughCopy("icon-maskable.png");
+  eleventyConfig.addPassthroughCopy("manifest.json");
   eleventyConfig.addPassthroughCopy("cv");
   eleventyConfig.addPassthroughCopy("images");
 
