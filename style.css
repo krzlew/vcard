@@ -1,4 +1,4 @@
-@font-face { font-family: "ModeSeven"; src: url("./fonts/modeseven.ttf") format("truetype"); font-display: swap; }
+@font-face { font-family: "ModeSeven"; src: url("./fonts/modeseven.woff2") format("woff2"), url("./fonts/modeseven.ttf") format("truetype"); font-display: swap; }
 :root { --bg: #000; --white: #e7e7e7; --yellow: #ffff00; --cyan: #00ffff; --blue: #0000ff; --red: #ff1a1a; --green: #00ff00; --magenta: #ff40ff; }
 * { box-sizing: border-box; }
 html, body { margin: 0; min-height: 100%; background: var(--bg); color: var(--white); }
