@@ -32,6 +32,8 @@
 </head>
 
 <body>
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+
   <main class="page">
 
     <header class="topbar">
@@ -56,6 +58,7 @@
       <div class="logo-extension">{% if extensionText %}<span>{{ extensionText }}</span>{% else %}&nbsp;{% endif %}</div>
     </section>
 
+    <div id="main-content"></div>
     {{ content | safe }}
 
     <footer>
