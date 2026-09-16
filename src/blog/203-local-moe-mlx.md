@@ -168,6 +168,8 @@ All tests below used the same prompt and a 256-token limit on my Mac:
 
 DeepSeek-Coder-V2-Lite is clearly the fastest and lightest of the three. Qwen3.6-35B-A3B remains my preferred model for larger agentic tasks and multi-step tool use - the extra memory usage and lower throughput are worth it once the task goes beyond straightforward code completion.
 
+For a wider comparison across 29 models on this same machine, see my [rapid-mlx benchmark results](/tidbits/rapid-mlx-benchmarks/).
+
 ## PRACTICAL NOTES
 
 On a 32 GB Mac, context size matters almost as much as model size. Large codebases and long agent sessions can push memory pressure high enough to trigger swapping. If that happens, reduce the KV-cache size, shorten the active context, or switch to the smaller DeepSeek-Coder-V2-Lite model.
