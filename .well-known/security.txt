@@ -1,0 +1,4 @@
+Contact: mailto:kontakt@htsh.pl
+Expires: 2027-09-16T00:00:00.000Z
+Canonical: https://htsh.pl/.well-known/security.txt
+Preferred-Languages: en, pl
