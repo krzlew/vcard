@@ -30,7 +30,7 @@ A few things it does beyond "static site with a retro theme":
 
 ## Project structure
 
-```
+```text
 src/
   _includes/layouts/   shared Nunjucks layouts (base page shell, post, project, generic page)
   _data/site.js        sitewide metadata (URL, title, description, author)
