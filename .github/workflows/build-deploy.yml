@@ -44,3 +44,12 @@ jobs:
             cd ${{ secrets.DEPLOY_COMPOSE_DIR }}
             docker compose pull vcard
             docker compose up -d vcard
+
+      - name: Submit sitemap to IndexNow
+        run: |
+          sleep 10
+          urls=$(curl -fsSL https://htsh.pl/sitemap.xml | grep -oE '<loc>[^<]+</loc>' | sed -E 's#</?loc>##g')
+          urlList=$(printf '%s\n' "$urls" | jq -R . | jq -s .)
+          curl -fsS -X POST https://api.indexnow.org/indexnow \
+            -H "Content-Type: application/json" \
+            -d "{\"host\":\"htsh.pl\",\"key\":\"62611073cbc6e41a8a8bf05eac0b32b6\",\"keyLocation\":\"https://htsh.pl/62611073cbc6e41a8a8bf05eac0b32b6.txt\",\"urlList\":$urlList}"

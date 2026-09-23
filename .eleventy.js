@@ -26,6 +26,7 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy("manifest.json");
   eleventyConfig.addPassthroughCopy("llms.txt");
   eleventyConfig.addPassthroughCopy(".well-known");
+  eleventyConfig.addPassthroughCopy("62611073cbc6e41a8a8bf05eac0b32b6.txt");
   eleventyConfig.addPassthroughCopy("cv");
   eleventyConfig.addPassthroughCopy("images");
 
