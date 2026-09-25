@@ -7,7 +7,7 @@ layout: layouts/base.njk
  DATE:  <a class="u-url" href="{{ site.url }}{{ page.url }}"><time class="dt-published" datetime="{{ date | dateToRfc3339 }}">{{ date | dateDisplay }}</time></a>{% if tags %}
  TAGS:  {% for tag in tags %}<span class="p-category">{{ tag }}</span>{% if not loop.last %}, {% endif %}{% endfor %}{% endif %}</pre>
 
-    <span class="p-author h-card" hidden><a class="p-name u-url" rel="author" href="{{ site.url }}">{{ site.author }}</a></span>
+    <span class="p-author h-card" hidden><img class="u-photo" src="{{ site.url }}/avatar-pixel-small.png" alt=""><a class="p-name u-url" rel="author" href="{{ site.url }}">{{ site.author }}</a></span>
 
     <div class="e-content">
     {{ content | safe }}
