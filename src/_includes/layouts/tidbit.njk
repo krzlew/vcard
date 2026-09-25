@@ -1,13 +1,17 @@
 ---
 layout: layouts/base.njk
 ---
-<section class="content content-full">
+<section class="content content-full h-entry">
   <div class="post-body">
-    <pre class="post-meta"> TITLE: {{ title | upper }}
- CREATED: {{ date | dateDisplay }}{% if updated %}
- UPDATED: {{ updated | dateDisplay }}{% endif %}</pre>
+    <pre class="post-meta"> TITLE: <span class="p-name">{{ title | upper }}</span>
+ CREATED: <time class="dt-published" datetime="{{ date | dateToRfc3339 }}">{{ date | dateDisplay }}</time>{% if updated %}
+ UPDATED: <time class="dt-updated" datetime="{{ updated | dateToRfc3339 }}">{{ updated | dateDisplay }}</time>{% endif %}</pre>
 
+    <span class="p-author h-card" hidden><a class="p-name u-url" href="{{ site.url }}">{{ site.author }}</a></span>
+
+    <div class="e-content">
     {{ content | safe }}
+    </div>
 
     <p class="post-nav">Type 500 for index.</p>
   </div>
