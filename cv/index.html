@@ -604,7 +604,19 @@
         /* ============================================
            PRINT STYLES — A4 CV
            ============================================ */
+        .print-only {
+            display: none;
+        }
+
         @media print {
+            .print-only {
+                display: block !important;
+                margin-top: 16px;
+                font-size: 7.5pt;
+                line-height: 1.4;
+                color: #555 !important;
+            }
+
             @page {
                 margin: 1.5cm 1.5cm 1.5cm 1.5cm;
                 size: A4;
@@ -632,19 +644,23 @@
                 display: none !important;
             }
 
-            /* Header print — compact */
+            /* Header print — compact two-column layout:
+               avatar+name/title on the left, contact/location on the right */
             header {
                 text-align: left !important;
                 margin-bottom: 16px !important;
                 padding-bottom: 12px !important;
                 border-bottom: 2px solid #1a1d23 !important;
-                display: flex !important;
+                display: grid !important;
+                grid-template-columns: auto max-content 1fr !important;
+                grid-template-areas: "avatar name contact" "avatar title contact" !important;
+                column-gap: 16px !important;
+                row-gap: 2px !important;
                 align-items: center !important;
-                gap: 16px !important;
-                flex-wrap: wrap !important;
             }
 
             .avatar {
+                grid-area: avatar !important;
                 width: 48px !important;
                 height: 48px !important;
                 font-size: 18px !important;
@@ -656,64 +672,62 @@
                 print-color-adjust: exact !important;
             }
 
-            header > div:not(.avatar):not(.social-links) {
-                flex: 1 !important;
-                text-align: left !important;
-            }
-
             h1 {
+                grid-area: name !important;
                 font-size: 16pt !important;
-                margin-bottom: 2px !important;
+                margin-bottom: 0 !important;
                 text-align: left !important;
+                align-self: end !important;
+                white-space: nowrap !important;
             }
 
             .title {
+                grid-area: title !important;
                 font-size: 10pt !important;
                 color: #2563eb !important;
-                margin-bottom: 2px !important;
+                margin-bottom: 0 !important;
                 text-align: left !important;
+                align-self: start !important;
             }
 
             .location {
-                font-size: 8.5pt !important;
-                color: #5c6270 !important;
-                margin-bottom: 0 !important;
-                text-align: left !important;
+                display: none !important;
             }
 
+            /* Links are dead weight on paper — drop the icon row and the
+               separate Contact section, and print plain contact text instead */
             .social-links {
-                display: flex !important;
-                gap: 4px !important;
-                justify-content: flex-start !important;
-                margin-left: auto !important;
+                display: none !important;
             }
-            .social-links a {
-                width: auto !important;
-                height: auto !important;
-                background: none !important;
-                border: none !important;
-                border-radius: 0 !important;
+
+            #contact {
+                display: none !important;
+            }
+
+            .print-contact {
+                grid-area: contact !important;
+                display: block !important;
+                text-align: right !important;
                 font-size: 8.5pt !important;
-                color: #5c6270 !important;
+                color: #374151 !important;
+                margin-top: 0 !important;
+                align-self: center !important;
+            }
+
+            .print-contact span {
                 display: inline-flex !important;
                 align-items: center !important;
-                gap: 4px !important;
-                padding: 2px 6px !important;
-                box-shadow: none !important;
-                transform: none !important;
+                gap: 3px !important;
+                margin-left: 8px !important;
             }
 
-            .social-links a:hover {
-                transform: none !important;
-                box-shadow: none !important;
+            .print-contact span:first-child {
+                margin-left: 0 !important;
             }
 
-            .social-links a .label {
-                display: inline !important;
-            }
-
-            .social-links a i {
-                font-size: 8pt !important;
+            .print-contact span i {
+                font-size: 7.5pt !important;
+                color: #2563eb !important;
             }
 
             /* Reset all cards to flat */
@@ -742,11 +756,14 @@
             /* Skills print — compact inline */
             .skills-grid {
                 display: block !important;
+                column-count: 2 !important;
+                column-gap: 24px !important;
             }
 
             .skill-category {
                 margin-bottom: 3px !important;
                 padding: 0 !important;
+                break-inside: avoid;
                 page-break-inside: avoid;
             }
 
@@ -891,29 +908,7 @@
             }
 
             .about-highlights {
-                display: block !important;
-                margin-top: 0 !important;
-            }
-
-            .about-highlight {
-                display: inline !important;
-                padding: 0 !important;
-                margin: 0 !important;
-                border: none !important;
-                border-radius: 0 !important;
-                background: none !important;
-                box-shadow: none !important;
-                color: #374151 !important;
-                font-size: 8.5pt !important;
-            }
-
-            .about-highlight i {
                 display: none !important;
-            }
-
-            .about-highlight:not(:last-child)::after {
-                content: " · ";
-                color: #5c6270;
             }
 
             /* Section headers print */
@@ -1035,6 +1030,13 @@
                     <i class="fas fa-globe"></i>
                     <span class="label">htsh.pl</span>
                 </a>
+            </div>
+            <div class="print-contact print-only">
+                <span><i class="fas fa-envelope"></i>kontakt@htsh.pl</span>
+                <span><i class="fas fa-phone"></i>+48 503 368 326</span>
+                <span><i class="fab fa-linkedin-in"></i>/krzysztof-lewczuk</span>
+                <span><i class="fas fa-globe"></i>htsh.pl</span>
+                <span><i class="fas fa-map-marker-alt"></i>Wrocław, Poland · Remote Friendly</span>
             </div>
         </header>
 
@@ -1237,23 +1239,25 @@
                     <div class="timeline-company">Thaumatec Tech Group · Wrocław, Poland</div>
                     <div class="timeline-desc">
                         <ul>
-                            <li>Leading DevOps practices and cloud infrastructure strategy</li>
-                            <li>Managing CI/CD pipelines, container orchestration, and cloud resource provisioning</li>
-                            <li>Introduced automation and infrastructure-as-code practices across teams</li>
+                            <li>Develop and maintain infrastructure and DevOps pipelines across a portfolio of concurrent client projects in regulated industries (healthtech, medical devices), on AWS, Azure, and dedicated government cloud</li>
+                            <li>Build CI/CD pipelines for medical device software (SaMD) on iOS and Android that generate the compliance evidence auditors ask for — SAST, DAST, SBOM, SCA, and vulnerability scan reports — against ISO 27001, ISO 13485, IEC 62304, FDA 21 CFR Part 11, GDPR, and NIS2</li>
+                            <li>Lead cloud migrations and infrastructure modernization for clients moving off legacy setups, codifying environments with Terraform and CloudFormation and configuration with Ansible</li>
+                            <li>Design automated data pipelines, including AI-driven aggregation of external data sources into unified client portals</li>
+                            <li>Introduce monitoring and observability so clients get real visibility into infrastructure health and compliance posture</li>
                         </ul>
                     </div>
                 </div>
 
                 <div class="timeline-item">
                     <div class="timeline-header">
-                        <h3>Owner</h3>
+                        <h3>Founder &amp; Principal DevOps Consultant</h3>
                         <span class="timeline-date">Jan 2018 — Present</span>
                     </div>
                     <div class="timeline-company">HTSH · Poland</div>
                     <div class="timeline-desc">
                         <ul>
-                            <li>Running independent DevOps consultancy and web development services</li>
-                            <li>Managing cloud infrastructure and automation for clients</li>
+                            <li>Deliver independent cloud architecture, site reliability, and DevOps automation consulting for diverse client engagements</li>
+                            <li>Design and implement tailored Infrastructure as Code (IaC), zero-downtime deployment pipelines, and scalable cloud operating models</li>
                         </ul>
                     </div>
                 </div>
@@ -1263,11 +1267,12 @@
                         <h3>Senior DevOps Engineer</h3>
                         <span class="timeline-date">Aug 2022 — Aug 2023</span>
                     </div>
-                    <div class="timeline-company">Eviden · Wrocław, Poland</div>
+                    <div class="timeline-company">Eviden (part of Atos) · Wrocław, Poland</div>
                     <div class="timeline-desc">
                         <ul>
-                            <li>Led infrastructure automation and cloud operations</li>
-                            <li>Managed CI/CD pipelines, container deployments, and system reliability</li>
+                            <li>Managed high-density cloud infrastructure for HealthSuite Digital Platform (HSDP), maintaining thousands of regulated AWS multi-tenant environments supporting global healthcare solutions</li>
+                            <li>Automated provisioning of scalable cloud foundations (VPC, EC2, RDS, IAM, S3) using Terraform, AWS CloudFormation, and custom AWS CLI automation scripts</li>
+                            <li>Standardized observability and compliance across all workloads using Amazon CloudWatch, CloudTrail, and New Relic dashboards; streamlined release cadences using Jenkins, Git, and AWS CodePipeline</li>
                         </ul>
                     </div>
                 </div>
@@ -1277,13 +1282,12 @@
                         <h3>DevOps Engineer</h3>
                         <span class="timeline-date">Sep 2020 — Jun 2022</span>
                     </div>
-                    <div class="timeline-company">Star (acquired by Pro4People) · Wrocław, Poland</div>
+                    <div class="timeline-company">Star (acquired Pro4People) · Wrocław, Poland</div>
                     <div class="timeline-desc">
                         <ul>
-                            <li>Developed and maintained medical products (Software as Medical Device) based on QMS compliance with all applicable regulations and standards</li>
-                            <li>Deployed and maintained SDLC and PLC environments</li>
-                            <li>Developed Infrastructure as Code with Terraform and AWS provider (VPC, EC2, Auto Scaling, RDS, S3, Route53, Lambda, CloudFront, CloudWatch, AMI, AWS Backup)</li>
-                            <li>Implemented and maintained build environment — Jenkins, SonarQube, Nexus repository, Packer, Ansible, OpenVPN</li>
+                            <li>Maintained Software as a Medical Device (SaMD) platforms under strict Quality Management System (QMS) frameworks, ensuring full alignment with medical device regulatory standards (ISO 13485 / FDA)</li>
+                            <li>Authored end-to-end Terraform configurations across core AWS services (VPC, EC2 Auto Scaling, RDS, Lambda, CloudFront, Route 53, AWS Backup)</li>
+                            <li>Established and administered robust CI/CD and artifact pipelines using Jenkins, SonarQube, Sonatype Nexus, Packer, Ansible, and OpenVPN across SDLC and PLC environments</li>
                         </ul>
                     </div>
                 </div>
@@ -1293,29 +1297,27 @@
                         <h3>DevOps Engineer</h3>
                         <span class="timeline-date">May 2019 — Jun 2020</span>
                     </div>
-                    <div class="timeline-company">NeuroSYS · Wrocław Area, Poland</div>
+                    <div class="timeline-company">NeuroSYS · Wrocław, Poland</div>
                     <div class="timeline-desc">
                         <ul>
-                            <li>Deployed and maintained products written in PHP, .NET, and Node.js — served via direct deployment, Docker containers, and Helm charts on Kubernetes</li>
-                            <li>Configuration management with Terraform, Ansible, and code deployment using GitLab CI</li>
-                            <li>Managed public cloud, private cloud, and dedicated server infrastructure (AWS, Azure, DigitalOcean, OpenStack, Hetzner)</li>
-                            <li>Built and deployed Docker containers to break up monolithic apps into microservices, improving developer workflow and scalability</li>
-                            <li>Installed and configured Zabbix and Sentry for infrastructure and application error monitoring</li>
-                            <li>Set up on-premises Kubernetes cluster for development and GitLab CI runners with shared cache</li>
+                            <li>Architected multi-cloud and hybrid environments spanning AWS, Azure, DigitalOcean, Hetzner, and on-premises OpenStack clusters</li>
+                            <li>Decoupled legacy monolithic applications (PHP, .NET, Node.js) into containerized microservices managed via Docker and Helm on Kubernetes, improving deployment frequency and developer productivity</li>
+                            <li>Standardized configuration management with Terraform and Ansible, driving automated rollouts via GitLab CI with persistent distributed runner caches</li>
+                            <li>Deployed centralized system logging and application performance monitoring using Zabbix and Sentry</li>
                         </ul>
                     </div>
                 </div>
 
                 <div class="timeline-item">
                     <div class="timeline-header">
-                        <h3>DevOps Engineer</h3>
+                        <h3>DevOps Engineer (Contract)</h3>
                         <span class="timeline-date">Feb 2019 — Apr 2019</span>
                     </div>
-                    <div class="timeline-company">The Coders · Wrocław Area, Poland</div>
+                    <div class="timeline-company">The Coders · Wrocław, Poland</div>
                     <div class="timeline-desc">
                         <ul>
-                            <li>Short-term contract to prepare highly available environment for a web application</li>
-                            <li>Designed and implemented infrastructure based on OpenStack private cloud with Terraform and Ansible</li>
+                            <li>Delivered a turnkey, highly available web hosting architecture on an OpenStack private cloud under a fixed delivery window</li>
+                            <li>Automated end-to-end environment provisioning and application deployment using Terraform and Ansible</li>
                         </ul>
                     </div>
                 </div>
@@ -1328,28 +1330,24 @@
                     <div class="timeline-company">Piwik PRO · Wrocław, Poland</div>
                     <div class="timeline-desc">
                         <ul>
-                            <li>Deployed and maintained a new product based on Docker Containers, Rancher Orchestrator, Linux, Ansible on on-premises (bare metal, VMs) and public cloud (AWS, Azure) infrastructure</li>
-                            <li>Deployed and maintained a legacy product based on Linux, Keepalived, HAProxy, Nginx, php-fpm, MySQL/MariaDB, Nagios, Puppet on on-premises and cloud infrastructure</li>
-                            <li>Maintained various Linux environments (Debian, Ubuntu, CentOS, RHEL)</li>
-                            <li>Migrated customer data from legacy product to the new product</li>
+                            <li>Deployed and administered new containerized platform infrastructure leveraging Docker, Rancher Orchestrator, Linux, and Ansible across bare-metal, VM, and public cloud (AWS/Azure) environments</li>
+                            <li>Maintained high-availability production environments using HAProxy, Keepalived, Nginx, PHP-FPM, MySQL/MariaDB, and Nagios across mixed Linux distributions (RHEL, CentOS, Debian, Ubuntu)</li>
+                            <li>Successfully executed zero-loss customer data migrations from legacy platforms into modern containerized clusters</li>
                         </ul>
                     </div>
                 </div>
 
                 <div class="timeline-item">
                     <div class="timeline-header">
-                        <h3>IT Specialist</h3>
+                        <h3>IT Specialist / Systems Administrator</h3>
                         <span class="timeline-date">Mar 2015 — Jan 2018</span>
                     </div>
                     <div class="timeline-company">ASAJ · Siedlce, Poland</div>
                     <div class="timeline-desc">
                         <ul>
-                            <li>Implemented and maintained a Windows domain-based infrastructure</li>
-                            <li>Led migration to a virtualized environment</li>
-                            <li>Configured, installed, and maintained hardware/software equipment including routers and switches at 19 locations</li>
-                            <li>Built several internal PHP applications integrated with CRM/ERP systems</li>
-                            <li>Automated redundant tasks using PowerShell</li>
-                            <li>Worked with employees to resolve complex support requests</li>
+                            <li>Administered Windows Active Directory enterprise domain and directed the infrastructure migration from physical servers to a virtualized hypervisor setup</li>
+                            <li>Maintained enterprise networking hardware (routers, managed switches) across 19 branch locations to ensure continuous uptime and operational connectivity</li>
+                            <li>Developed custom internal PHP tools integrated with CRM/ERP systems and scripted routine administrative workflows using PowerShell</li>
                         </ul>
                     </div>
                 </div>
@@ -1359,13 +1357,11 @@
                         <h3>IT Specialist</h3>
                         <span class="timeline-date">Mar 2013 — Mar 2015</span>
                     </div>
-                    <div class="timeline-company">SEDKOMP Sp. Jawna Sawicki, Sikora · Siedlce, Poland</div>
+                    <div class="timeline-company">SEDKOMP Sp. J. · Siedlce, Poland</div>
                     <div class="timeline-desc">
                         <ul>
-                            <li>Performed maintenance, troubleshooting, and repair on desktop/laptop PCs and networks</li>
-                            <li>Configured, deployed, and maintained CRM, WMS, and ERP systems</li>
-                            <li>Resolved technical issues on-site and remotely</li>
-                            <li>Created websites using WordPress and Joomla</li>
+                            <li>Delivered tier-2/3 technical diagnostics, workstation/network repairs, and system maintenance across client locations and remote connections</li>
+                            <li>Implemented, configured, and supported enterprise CRM, WMS, and ERP installations, complemented by CMS web development (WordPress, Joomla)</li>
                         </ul>
                     </div>
                 </div>
@@ -1378,6 +1374,8 @@
         <footer>
             <p>Built with HTML &amp; CSS · <a href="#" onclick="window.print(); return false;" style="color:var(--accent);text-decoration:none;">Print CV</a></p>
         </footer>
+
+        <p class="print-only">I hereby give consent for my personal data included in my application to be processed for the purposes of the current and future recruitment processes in accordance with Art. 6 Abs. 1 lit. a of the Regulation (EU) 2016/679 of the European Parliament and of the Council of 27 April 2016 (GDPR).</p>
     </div>
 
     <script>
