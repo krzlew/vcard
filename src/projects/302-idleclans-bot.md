@@ -8,19 +8,21 @@ number: 302
 tech: Python / discord.py
 status: MAINTAINED
 summary: Discord bot for Idle Clans, still running for my old clan
+images:
+  - /images/projects/idleclans-bot/slash-commands.png
+  - /images/projects/idleclans-bot/ping-help-lvl.png
+  - /images/projects/idleclans-bot/info2-card.png
 ---
-A Discord bot for [Idle Clans](https://idleclans.com/), built for my
-own in-game clan — mostly for stats. I've since stopped playing, but
-the bot is still running and the clan still uses it.
+A Discord bot for [Idle Clans](https://idleclans.com/), built for my own in-game clan, mostly for stats. I've since stopped playing, but the bot is still running and the clan still uses it.
 
 ## OVERVIEW
 
-Slash commands and scheduled tasks pull clan and player data from
-the game and post it back into Discord: XP tracking, clan activity
-logs, and leaderboard-style stats the clan actually looks at.
+Slash commands and scheduled tasks pull clan and player data from the game and post it back into Discord: XP tracking, clan activity logs, and leaderboard-style stats the clan actually looks at.
 
 ## STACK
 
-Python with discord.py, polling the game's API on a schedule and
-rendering some of the output as images (Pillow + pilmoji) for
-readable in-Discord stat cards.
+Python with discord.py, polling the game's API on a schedule and rendering some of the output as images (Pillow + pilmoji) for readable in-Discord stat cards.
+
+## BUILD YOUR OWN
+
+How to register a bot, add slash commands and run it in Docker is in the post [Discord bot with slash commands, Python and Docker](/blog/discord-bot-python/).
