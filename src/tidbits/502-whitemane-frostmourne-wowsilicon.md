@@ -5,7 +5,7 @@ extensionText: "502: WOWSILICON FROSTMOURNE SETUP"
 title: Running Whitemane Frostmourne WotLK on Apple Silicon via WoWSilicon
 number: 502
 date: 2026-09-19
-updated: 2026-09-19
+updated: 2026-11-14
 summary: Whitemane's macOS client for the new Frostmourne Rebuffed WotLK server just downloads the Windows binary - here's running that binary through WoWSilicon (Wine + Metal translation) instead.
 permalink: /tidbits/whitemane-frostmourne-wowsilicon/
 ---
@@ -139,6 +139,7 @@ If audio already works, don't change anything.
 - **"Could not load kernel32.dll", game won't launch** - the Wine prefix (`~/WoWSilicon`) is corrupted. Quit WoWSilicon, kill any lingering Wine processes, delete `~/WoWSilicon`, and restart WoWSilicon to recreate it: `osascript -e 'tell application "WoWSilicon" to quit'; pkill -9 wineserver 2>/dev/null || true; pkill -9 -f "wine.*x86" 2>/dev/null || true; rm -rf ~/WoWSilicon; open -a WoWSilicon`
 - **Black screen with music/cursor** - check that Graphics Backend is `MTLD3D` (not `DXVK`) in WoWSilicon, try windowed mode first (`SET gxWindow "1"` in `Config.wtf`), and confirm HDR mode is enabled.
 - **ERROR #132 crash (ACCESS_VIOLATION in wined3d.dll)** - the game is using Wine's D3D implementation instead of Metal. Delete `dxvk.conf` from the client folder if present, verify Graphics Backend is `MTLD3D`, and launch `Wow.exe` directly rather than a manually patched copy.
+- I've been asked about a bug involving graphical glitches, such as disappearing feet and facial glitches, which I've also experienced myself after one of the recent updates (November 2026). Running the Scan and Fix Files option in the Whitemane client seems to resolve the issue.
 
 ## HOW IT WORKS
 
