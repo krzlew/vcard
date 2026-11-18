@@ -4,7 +4,7 @@ pageNumber: P210
 extensionText: "210: HOMEMADE TAMAGOTCHI, PART 1"
 title: "A homemade Tamagotchi, part 1: the pet on my screen"
 number: 210
-date: 2026-11-14
+date: 2026-11-18
 tags: [TAMAGOTCHI, EMULATOR, C, RETRO]
 summary: Building a Tamagotchi-style pet, starting with the half that runs in a window on my computer - the rules I recovered, how it fits a 32x16 screen and what keeps the pet alive
 permalink: /blog/homemade-tamagotchi-part-1/
