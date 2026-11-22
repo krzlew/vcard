@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="color-scheme" content="light dark">
     <title>Krzysztof Lewczuk — Senior DevOps Engineer</title>
     <meta name="description" content="CV of Krzysztof Lewczuk, Senior DevOps Engineer — cloud infrastructure, containers, CI/CD, and infrastructure as code.">
     <link rel="canonical" href="https://htsh.pl/cv/">
@@ -14,7 +15,7 @@
     <meta name="twitter:title" content="Krzysztof Lewczuk — Senior DevOps Engineer">
     <meta name="twitter:description" content="CV of Krzysztof Lewczuk, Senior DevOps Engineer — cloud infrastructure, containers, CI/CD, and infrastructure as code.">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha384-/o6I2CkkWC//PSjvWC/eYN7l3xM3tJm8ZzVkCOfp//W05QcE3mlGskpoHB6XqI+B" crossorigin="anonymous" referrerpolicy="no-referrer">
     <style>
         /* ============================================
            CSS VARIABLES — THEME SYSTEM
@@ -1383,23 +1384,29 @@
         const toggle = document.getElementById('themeToggle');
         const icon = document.getElementById('themeIcon');
         const html = document.documentElement;
+        const schemeMeta = document.querySelector('meta[name="color-scheme"]');
 
         const savedTheme = localStorage.getItem('theme');
         const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
 
         if (savedTheme === 'dark' || (!savedTheme && systemDark)) {
             html.setAttribute('data-theme', 'dark');
+            schemeMeta.content = 'dark';
             icon.className = 'fas fa-sun';
+        } else if (savedTheme === 'light') {
+            schemeMeta.content = 'light';
         }
 
         toggle.addEventListener('click', () => {
             const isDark = html.getAttribute('data-theme') === 'dark';
             if (isDark) {
                 html.removeAttribute('data-theme');
+                schemeMeta.content = 'light';
                 localStorage.setItem('theme', 'light');
                 icon.className = 'fas fa-moon';
             } else {
                 html.setAttribute('data-theme', 'dark');
+                schemeMeta.content = 'dark';
                 localStorage.setItem('theme', 'dark');
                 icon.className = 'fas fa-sun';
             }

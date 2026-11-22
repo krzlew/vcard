@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Krzysztof Lewczuk — Senior DevOps Engineer [Windows 98]</title>
     <meta name="robots" content="noindex">
-    <link rel="stylesheet" href="https://unpkg.com/98.css@0.1.21/dist/98.css">
+    <link rel="stylesheet" href="https://unpkg.com/98.css@0.1.21/dist/98.css" integrity="sha384-15ft94Qa+wtquckGuqoUZVwmRnPrMFakV20jxURH5clORpGUeXAbhNK5x6aVebrD" crossorigin="anonymous" referrerpolicy="no-referrer">
     <style>
         /* ============================================
            WINDOWS 98 DESKTOP
@@ -1317,7 +1317,7 @@
             dialogIcon.innerHTML = DIALOG_ICONS[icon] || DIALOG_ICONS.info;
             dialogText.textContent = text;
             dialogText.style.whiteSpace = 'pre-line';
-            dialogButtons.innerHTML = '';
+            dialogButtons.replaceChildren();
             buttons.forEach(b => {
                 const btn = document.createElement('button');
                 btn.textContent = b.label || b;
